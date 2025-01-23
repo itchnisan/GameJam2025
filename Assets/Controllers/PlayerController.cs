@@ -14,6 +14,13 @@ public class PlayerController : PlayerCharacter
     void Update()
     {
         HandleMovement();
+
+        //test degat
+        if (Time.time % 3 < Time.deltaTime)
+            {
+            TakeDamage(10); // Call TakeDamage every 3 seconds with a damage value of 10
+            }
+        Debug.Log("Health: " + health);
     }
 
     void HandleMovement()
