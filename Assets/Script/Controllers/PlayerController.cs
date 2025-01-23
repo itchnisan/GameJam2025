@@ -4,7 +4,13 @@ using Models;
 public class PlayerController : PlayerCharacter
 {
     private Vector2 targetPosition;
+
+    private Vector2 shootDirection;
     private bool isMoving = false;
+
+    private bool canShoot = true;
+
+    public GameObject bulletPrefab;
 
     void Start()
     {
@@ -16,11 +22,11 @@ public class PlayerController : PlayerCharacter
         HandleMovement();
 
         //test degat
-        if (Time.time % 3 < Time.deltaTime)
+        /*if (Time.time % 3 < Time.deltaTime)
             {
             TakeDamage(10); // Call TakeDamage every 3 seconds with a damage value of 10
             }
-        Debug.Log("Health: " + health);
+        Debug.Log("Health: " + health);*/
     }
 
     void HandleMovement()
@@ -53,6 +59,23 @@ public class PlayerController : PlayerCharacter
             if (Vector2.Distance(transform.position, targetPosition) < 0.1f)
             {
                 isMoving = false;
+            }
+        }
+    }
+
+    void doAttack()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 clickPosition = new Vector2(mousePosition.x, mousePosition.y);
+
+            if (canShoot) 
+            {
+                GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+                bullet.GetComponent<Bullet>().Setup(shootDirection, 300f);
+                Invoke("ResetShot", 0.5f);
+                shootDirection = clickPosition;
             }
         }
     }
