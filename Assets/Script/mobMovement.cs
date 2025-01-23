@@ -1,10 +1,10 @@
+using System;
 using UnityEngine;
 
 public class mobMovement : MonoBehaviour
 {
     public MobAI currentAI;
 
-    public GameObject mob;
     public GameObject player;
 
     public float moveSpeed = 250f;
@@ -25,7 +25,9 @@ public class mobMovement : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        currentAI = new AIRun(mob.GetComponent<Rigidbody2D>(),player.GetComponent<Transform>(), moveSpeed); //TODO changer si besoin
+        
+        currentAI = new AIRun(this.GetComponent<Rigidbody2D>(),player.GetComponent<Transform>(), moveSpeed); //TODO changer si besoin
+        
     }
 
     // Update is called once per frame
