@@ -1,4 +1,5 @@
 using System;
+using Models;
 using UnityEngine;
 
 public class MobMovement : MonoBehaviour
@@ -8,7 +9,7 @@ public class MobMovement : MonoBehaviour
 
     private GameObject player;
 
-    public float moveSpeed = 250f;
+    private float moveSpeed;
     
     public MobMovement(Func<Rigidbody2D, Transform, float, MobAI> fn)
     {
@@ -17,6 +18,7 @@ public class MobMovement : MonoBehaviour
 
     public void initAI()
     {
+        moveSpeed = this.GetComponent<Entity>().walkSpeed;
         currentAI = fn.Invoke(this.GetComponent<Rigidbody2D>(), player.GetComponent<Transform>(), moveSpeed);
     }
 
