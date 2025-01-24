@@ -1,3 +1,4 @@
+using Assets.Script.Models;
 using Models;
 using UnityEngine;
 
@@ -7,9 +8,14 @@ public class PlayerController : PlayerCharacter
 
     private bool canShoot = true;
 
+    private Rigidbody2D rb;
+
+    private Vector3 reference = Vector3.zero;
+
     void Start()
     {
         targetPosition = transform.position;
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -53,18 +59,24 @@ public class PlayerController : PlayerCharacter
             }
         }
 
-
     }
 
     private void Move()
     {
         float currentSpeed = Input.GetKey(KeyCode.LeftShift) ? run : walkSpeed;
 
-        transform.position = Vector2.MoveTowards(transform.position, targetPosition, currentSpeed * Time.deltaTime);
+        float deltaX = targetPosition.x - this.transform.position.x;
+        float deltaY = targetPosition.y - this.transform.position.y;
+
+        Vector2 movement = new Vector2(deltaX, deltaY);
+        //transform.position = Vector2.MoveTowards(transform.position, targetPosition, currentSpeed * Time.deltaTime);
+
+        MakeMove(movement, currentSpeed);
 
         if (Vector2.Distance(transform.position, targetPosition) < 0.1f)
         {
             targetPosition = transform.position;
+            rb.linearVelocity = Vector2.zero;
             isMoving = false;
         }
     }
@@ -93,6 +105,15 @@ public class PlayerController : PlayerCharacter
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("bitch");
-        GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
+        rb.linearVelocity = Vector2.zero;
+    }
+
+
+    private void MakeMove(Vector2 _movement, float moveSpeed)
+    {
+        _movement.Normalize();
+        _movement = _movement * moveSpeed * Time.deltaTime;
+
+        rb.linearVelocity = Vector3.SmoothDamp(rb.linearVelocity, _movement, ref reference, 0.05f);
     }
 }
