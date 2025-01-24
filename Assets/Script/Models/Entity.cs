@@ -31,6 +31,8 @@ namespace Models
             {
                 Die();
             }
+
+            //TODO knockback
         }
 
         public void Die()
