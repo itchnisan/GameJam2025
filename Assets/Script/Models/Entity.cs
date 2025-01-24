@@ -14,6 +14,7 @@ namespace Models
         public float walkSpeed;
         public float run;
         public float knockbackTime;
+        public float invincibilitySecondes;
 
         public Vector2 targetPosition;
 
@@ -62,6 +63,7 @@ namespace Models
         {
             rb.linearVelocity = Vector2.zero;
             StartCoroutine(KnockbackStun());
+            StartCoroutine(InvincibilityFrames(invincibilitySecondes));
         }
 
         public IEnumerator KnockbackStun()
@@ -69,6 +71,25 @@ namespace Models
             stun = true;
             yield return new WaitForSeconds(knockbackTime);
             stun = false;
+        }
+
+        public IEnumerator InvincibilityFrames(float invincibilityTime)
+        {
+            canBeAttacked = false;
+
+            //A CHANGER AVEC UN VRAI TRUC
+            SpriteRenderer sp = GetComponent<SpriteRenderer>();
+
+            Color oldColor = sp.color;
+            sp.color = Color.yellow;
+            //
+
+            yield return new WaitForSeconds(invincibilityTime);
+            canBeAttacked = true;
+
+            //FIN
+            sp.color = oldColor;
+
         }
 
         public void Die()

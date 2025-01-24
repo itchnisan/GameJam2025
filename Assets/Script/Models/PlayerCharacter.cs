@@ -12,6 +12,7 @@ namespace Models
 
             if (collider.CompareTag("Enemy"))
             {
+                Debug.Log("attaque prise");
                 Attack attackComponent = collider.GetComponentInParent<Attack>();
 
                 EnemyDamage(attackComponent);

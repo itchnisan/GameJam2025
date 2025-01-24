@@ -102,17 +102,13 @@ public class PlayerController : PlayerCharacter
         canShoot = true;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Debug.Log("bitch");
-        rb.linearVelocity = Vector2.zero;
-    }
+    
 
 
     private void MakeMove(Vector2 _movement, float moveSpeed)
     {
         _movement.Normalize();
-        _movement = _movement * moveSpeed * Time.deltaTime;
+        _movement = moveSpeed * Time.deltaTime * _movement;
 
         rb.linearVelocity = Vector3.SmoothDamp(rb.linearVelocity, _movement, ref reference, 0.05f);
     }
