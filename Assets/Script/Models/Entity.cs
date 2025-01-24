@@ -11,14 +11,19 @@ namespace Models
         public int health;
         public int damage;
         public float walkSpeed;
-        public float runSpeed;
+        public float run;
 
+        public Vector2 targetPosition;
 
 
         [Header("States")]
         public bool stun = false;
         public bool inFire = false;
         public bool test = true;
+
+        [Header("References")]
+
+        public GameObject bulletPrefab;
     
         public void TakeDamage(int damage)
         {

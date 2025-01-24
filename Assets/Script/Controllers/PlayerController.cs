@@ -3,14 +3,9 @@ using Models;
 
 public class PlayerController : PlayerCharacter
 {
-    private Vector2 targetPosition;
-
-    private Vector2 shootDirection;
     private bool isMoving = false;
 
     private bool canShoot = true;
-
-    public GameObject bulletPrefab;
 
     void Start()
     {
@@ -21,12 +16,12 @@ public class PlayerController : PlayerCharacter
     {
         HandleMovement();
 
-        //test degat
-        /*if (Time.time % 3 < Time.deltaTime)
-            {
-            TakeDamage(10); // Call TakeDamage every 3 seconds with a damage value of 10
-            }
-        Debug.Log("Health: " + health);*/
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            DoAttack();
+
+        Debug.Log("OK");
+    }
     }
 
     void HandleMovement()
@@ -41,7 +36,6 @@ public class PlayerController : PlayerCharacter
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 clickPosition = new Vector2(mousePosition.x, mousePosition.y);
-
             RaycastHit2D hit = Physics2D.Raycast(clickPosition, Vector2.zero); 
             if (hit.collider != null) 
             {
@@ -52,7 +46,7 @@ public class PlayerController : PlayerCharacter
 
         if (isMoving)
         {
-            float currentSpeed = Input.GetKey(KeyCode.LeftShift) ? runSpeed : walkSpeed;
+            float currentSpeed = Input.GetKey(KeyCode.LeftShift) ? run : walkSpeed;
 
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, currentSpeed * Time.deltaTime);
 
@@ -63,20 +57,23 @@ public class PlayerController : PlayerCharacter
         }
     }
 
-    void doAttack()
-    {
-        if (Input.GetMouseButtonDown(0))
+    void DoAttack() {
+        if (canShoot)
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 clickPosition = new Vector2(mousePosition.x, mousePosition.y);
+            Vector2 shootDirection = mousePosition - transform.position;
+            
+            GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            Debug.Log(shootDirection.normalized *10f);
+            bullet.GetComponent<Rigidbody2D>().linearVelocity = shootDirection.normalized * 10f; // Assurez-vous que bulletPrefab a un Rigidbody2D attaché
 
-            if (canShoot) 
-            {
-                GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-                bullet.GetComponent<Bullet>().Setup(shootDirection, 300f);
-                Invoke("ResetShot", 0.5f);
-                shootDirection = clickPosition;
-            }
-        }
+            /*canShoot = false;
+            Invoke(nameof(ResetShoot), 5); // Assurez-vous que shootCooldown est défini*/
+    }
+    }
+
+    void ResetShoot()
+    {
+        canShoot = true;
     }
 }
