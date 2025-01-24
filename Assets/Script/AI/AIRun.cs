@@ -7,20 +7,21 @@ public class AIRun : MobAI
 
     private Vector3 velocity = Vector3.zero;
 
-    public AIRun(Rigidbody2D _monsterRB, Transform _playerPosition, float _moveSpeed ) : base(_moveSpeed)
+    public AIRun(Rigidbody2D _monsterRB, Transform _playerPosition, float _moveSpeed) : base(_moveSpeed)
     {
         monsterRB = _monsterRB;
         playerPosition = _playerPosition;
     }
     public override void onNextTick()
     {
-        if(playerPosition != null && monsterRB != null) {
+        if (playerPosition != null && monsterRB != null)
+        {
             float deltaX = playerPosition.position.x - monsterRB.transform.position.x;
             float deltaY = playerPosition.position.y - monsterRB.transform.position.y;
 
             moveMonster(new Vector2(deltaX, deltaY));
         }
-         //implique qu'un des 2 soit mort   
+        //sinon implique qu'un des 2 soit mort   
     }
 
     private void moveMonster(Vector2 _movement)
@@ -33,4 +34,4 @@ public class AIRun : MobAI
 }
 
 
-    
+

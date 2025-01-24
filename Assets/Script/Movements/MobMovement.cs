@@ -10,7 +10,7 @@ public class MobMovement : MonoBehaviour
     private GameObject player;
 
     private float moveSpeed;
-    
+
     public MobMovement(Func<Rigidbody2D, Transform, float, MobAI> fn)
     {
         this.fn = fn;
@@ -45,10 +45,11 @@ public class MobMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    void FixedUpdate(){
+    void FixedUpdate()
+    {
         currentAI.onNextTick();
     }
 }

@@ -1,5 +1,5 @@
-using UnityEngine;
 using Models;
+using UnityEngine;
 
 public class PlayerController : PlayerCharacter
 {
@@ -44,15 +44,15 @@ public class PlayerController : PlayerCharacter
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 clickPosition = new Vector2(mousePosition.x, mousePosition.y);
-            RaycastHit2D hit = Physics2D.Raycast(clickPosition, Vector2.zero); 
-            if (hit.collider != null) 
+            RaycastHit2D hit = Physics2D.Raycast(clickPosition, Vector2.zero);
+            if (hit.collider != null)
             {
                 targetPosition = clickPosition;
                 isMoving = true;
             }
         }
 
-        
+
     }
 
     private void Move()
@@ -67,19 +67,20 @@ public class PlayerController : PlayerCharacter
         }
     }
 
-    void DoAttack() {
+    void DoAttack()
+    {
         if (canShoot)
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 shootDirection = mousePosition - transform.position;
-            
+
             GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-            Debug.Log(shootDirection.normalized *10f);
+            //Debug.Log(shootDirection.normalized * 10f);
             bullet.GetComponent<Rigidbody2D>().linearVelocity = shootDirection.normalized * 10f; // Assurez-vous que bulletPrefab a un Rigidbody2D attaché
 
             /*canShoot = false;
             Invoke(nameof(ResetShoot), 5); // Assurez-vous que shootCooldown est défini*/
-    }
+        }
     }
 
     void ResetShoot()
