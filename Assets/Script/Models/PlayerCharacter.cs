@@ -19,8 +19,35 @@ namespace Models
 
         void OnCollisionEnter2D(Collision2D collision)
         {
-            //Debug.Log("ca marche");
+            
             Collider2D collider = collision.collider;
+
+            if (collider.CompareTag("Enemy"))
+            {
+                Debug.Log("attaque prise");
+                Enemy enemy = collider.GetComponentInParent<Enemy>();
+                Rigidbody2D rb = collider.GetComponentInParent<Rigidbody2D>();
+                if (enemy == null)
+                {
+                    Debug.Log("enemy null");
+                }
+                if (rb == null)
+                {
+                    TakeDamage(enemy.attackBall);
+                    Debug.Log("rbenemy null");
+                }
+
+                else
+                {
+                    TakeDamage(enemy.attackBall, rb.linearVelocity);
+                }
+            }
+        }
+
+        void OnTriggerEnter2D(Collider2D collider)
+        {
+            Debug.Log("ca marche");
+            
 
             if (collider.CompareTag("Enemy"))
             {

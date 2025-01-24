@@ -14,7 +14,7 @@ namespace Assets.Script.Models
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            Debug.Log("quoicoube1");
+            //Debug.Log("quoicoube1");
             if (other.CompareTag("PlayerAttack"))
             {
                 PlayerCharacter player = other.GetComponentInParent<PlayerCharacter>();
