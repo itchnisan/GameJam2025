@@ -179,4 +179,4 @@ MonoBehaviour:
   canBeAttacked: 1
   attackBall: {fileID: 11400000, guid: 3ebb4dc7aff9ba945b9b38d71b76f724, type: 2}
   isCoroutineRunning: 0
-  bulletPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 5156471235371309508}

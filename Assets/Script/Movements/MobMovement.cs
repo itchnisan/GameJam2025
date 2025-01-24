@@ -39,12 +39,15 @@ public class MobMovement : MonoBehaviour
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public void baseStart()
+    public MobAI baseStart()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         mobEntity = GetComponent<Enemy>();
         mobRb = GetComponent<Rigidbody2D>();
         initAI();
+
+        //FINAL
+        return currentAI;
     }
 
     // Update is called once per frame
