@@ -10,6 +10,21 @@ public class PlayerController : PlayerCharacter
 
     private bool canShoot = true;
 
+    [SerializeField] // Rendre visible dans l'Inspector
+    private bool hasMelody1 = false; // Utilisé pour l'inspector
+    public bool HasMelody1 
+    { 
+        get => hasMelody1; 
+        private set => hasMelody1 = value; 
+    }
+
+    [SerializeField] // Rendre visible dans l'Inspector
+    private bool hasMelody2 = false; // Utilisé pour l'inspector
+    public bool HasMelody2 
+    { 
+        get => hasMelody2; 
+        private set => hasMelody2 = value; 
+    }
     public GameObject bulletPrefab;
 
     void Start()
@@ -63,20 +78,38 @@ public class PlayerController : PlayerCharacter
         }
     }
 
+    public void CollectMelody(int melodyNumber)
+    {
+        switch (melodyNumber)
+        {
+            case 1:
+                HasMelody1 = true;
+                Debug.Log("Melody 1 récupérée !");
+                break;
+            case 2:
+                HasMelody2 = true;
+                Debug.Log("Melody 2 récupérée !");
+                break;
+            default:
+                Debug.LogWarning("Numéro de mélodie non reconnu !");
+                break;
+        }
+    }
+
     void doAttack()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 clickPosition = new Vector2(mousePosition.x, mousePosition.y);
+        // if (Input.GetMouseButtonDown(0))
+        // {
+        //     Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //     Vector2 clickPosition = new Vector2(mousePosition.x, mousePosition.y);
 
-            if (canShoot) 
-            {
-                GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-                bullet.GetComponent<Bullet>().Setup(shootDirection, 300f);
-                Invoke("ResetShot", 0.5f);
-                shootDirection = clickPosition;
-            }
-        }
+        //     if (canShoot) 
+        //     {
+        //         GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        //         bullet.GetComponent<Bullet>().Setup(shootDirection, 300f);
+        //         Invoke("ResetShot", 0.5f);
+        //         shootDirection = clickPosition;
+        //     }
+        // }
     }
 }
