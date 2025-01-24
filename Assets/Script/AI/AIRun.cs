@@ -14,10 +14,13 @@ public class AIRun : MobAI
     }
     public override void onNextTick()
     {
-        float deltaX = playerPosition.position.x - monsterRB.transform.position.x;
-        float deltaY = playerPosition.position.y - monsterRB.transform.position.y;
+        if(playerPosition != null && monsterRB != null) {
+            float deltaX = playerPosition.position.x - monsterRB.transform.position.x;
+            float deltaY = playerPosition.position.y - monsterRB.transform.position.y;
 
-        moveMonster(new Vector2(deltaX, deltaY));
+            moveMonster(new Vector2(deltaX, deltaY));
+        }
+         //implique qu'un des 2 soit mort   
     }
 
     private void moveMonster(Vector2 _movement)

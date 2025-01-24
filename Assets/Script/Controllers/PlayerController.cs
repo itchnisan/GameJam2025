@@ -14,17 +14,25 @@ public class PlayerController : PlayerCharacter
 
     void Update()
     {
-        HandleMovement();
+        HandleMovementInput();
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
             DoAttack();
 
-        Debug.Log("OK");
-    }
+            Debug.Log("OK");
+        }
     }
 
-    void HandleMovement()
+    private void FixedUpdate()
+    {
+        if (isMoving)
+        {
+            Move();
+        }
+    }
+
+    void HandleMovementInput()
     {
         if (stun)
         {
@@ -44,16 +52,18 @@ public class PlayerController : PlayerCharacter
             }
         }
 
-        if (isMoving)
+        
+    }
+
+    private void Move()
+    {
+        float currentSpeed = Input.GetKey(KeyCode.LeftShift) ? run : walkSpeed;
+
+        transform.position = Vector2.MoveTowards(transform.position, targetPosition, currentSpeed * Time.deltaTime);
+
+        if (Vector2.Distance(transform.position, targetPosition) < 0.1f)
         {
-            float currentSpeed = Input.GetKey(KeyCode.LeftShift) ? run : walkSpeed;
-
-            transform.position = Vector2.MoveTowards(transform.position, targetPosition, currentSpeed * Time.deltaTime);
-
-            if (Vector2.Distance(transform.position, targetPosition) < 0.1f)
-            {
-                isMoving = false;
-            }
+            isMoving = false;
         }
     }
 
