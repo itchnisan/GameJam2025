@@ -8,24 +8,25 @@ public class CollisionHandler : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.name != "Player") {
-
-        Debug.Log("Collided with: " + collision.gameObject.name);
-
- 
-        collidedObject = collision.gameObject;
-
-  
-        if (collidedObject != null)
+        if (collision.gameObject.name != "Player")
         {
-   
-            Entity entity = collidedObject.GetComponent<Entity>();
-            if (entity != null)
+
+            Debug.Log("Collided with: " + collision.gameObject.name);
+
+
+            collidedObject = collision.gameObject;
+
+
+            if (collidedObject != null)
             {
-          
-                entity.TakeDamage(10);
+
+                Entity entity = collidedObject.GetComponent<Entity>();
+                if (entity != null)
+                {
+
+                    entity.TakeDamage(10);
+                }
             }
         }
-    }
     }
 }

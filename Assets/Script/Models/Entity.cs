@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Models
@@ -24,7 +23,7 @@ namespace Models
         [Header("References")]
 
         public GameObject bulletPrefab;
-    
+
         public void TakeDamage(int damage)
         {
             health -= damage;

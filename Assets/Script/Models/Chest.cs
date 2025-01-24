@@ -3,15 +3,15 @@ using UnityEngine;
 public class Chest : MonoBehaviour
 {
     public GameObject itemInside;
-    public Transform spawnPoint; 
-    public Animator animator;    
+    public Transform spawnPoint;
+    public Animator animator;
 
     private bool isPlayerNearby = false;
     private bool isOpened = false;
 
     void Update()
     {
-        
+
         if (isPlayerNearby && !isOpened && Input.GetKeyDown(KeyCode.E))
         {
             OpenChest();
@@ -22,7 +22,7 @@ public class Chest : MonoBehaviour
     {
         isOpened = true;
 
-        
+
         if (animator != null)
         {
             animator.SetTrigger("Open");
@@ -38,17 +38,17 @@ public class Chest : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other)
-{
-    if (other.CompareTag("Player"))
     {
-        Debug.Log("Le joueur est entré dans la zone du coffre.");
-        isPlayerNearby = true;
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Le joueur est entré dans la zone du coffre.");
+            isPlayerNearby = true;
+        }
     }
-}
 
     private void OnTriggerExit2D(Collider2D other)
     {
-     
+
         if (other.CompareTag("Player"))
         {
             isPlayerNearby = false;
