@@ -17,6 +17,8 @@ public class AudioManager : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
+        
+        
         if(!audioSource.isPlaying){
             audioSource.Play();
             //PlayNextSong();
