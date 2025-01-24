@@ -14,12 +14,11 @@ namespace Assets.Script.Models
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            Debug.Log("collision touchée");
-            //Collider2D collider = collision.collider;
-            if (collider.CompareTag("PlayerAttack"))
+            
+            if (other.CompareTag("PlayerAttack"))
             {
-                TakeDamage(collider.GetComponentsInParent<Attack>()[0].damage);
-                Debug.Log("degats");
+                TakeDamage(other.GetComponentsInParent<Attack>()[0].damage);
+                
             }
         }
     }
