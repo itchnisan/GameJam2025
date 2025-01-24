@@ -37,6 +37,7 @@ public class PlayerController : PlayerCharacter
         if (stun)
         {
             isMoving = false;
+            targetPosition = transform.position;
             return;
         }
 

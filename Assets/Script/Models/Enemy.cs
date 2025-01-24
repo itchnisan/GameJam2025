@@ -17,8 +17,17 @@ namespace Assets.Script.Models
             
             if (other.CompareTag("PlayerAttack"))
             {
-                TakeDamage(other.GetComponentsInParent<Attack>()[0].damage);
+                Attack attack = other.GetComponent<Attack>();
+                TakeDamage(attack);
                 
+            }
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.collider.CompareTag("Player"))
+            {
+                StartCoroutine(base.KnockbackStun());
             }
         }
     }
