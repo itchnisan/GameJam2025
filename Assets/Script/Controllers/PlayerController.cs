@@ -5,8 +5,7 @@ public class PlayerController : PlayerCharacter
 {
     private bool isMoving = false;
 
-    private bool canShoot = true;
-
+    
     void Start()
     {
         targetPosition = transform.position;
@@ -16,9 +15,9 @@ public class PlayerController : PlayerCharacter
     {
         HandleMovementInput();
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !isCoroutineRunning)
         {
-            DoAttack();
+            DoAttackBall();
 
             Debug.Log("OK");
         }
@@ -67,24 +66,8 @@ public class PlayerController : PlayerCharacter
         }
     }
 
-    void DoAttack()
+    void DoAttackBall()
     {
-        if (canShoot)
-        {
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 shootDirection = mousePosition - transform.position;
-
-            GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-            //Debug.Log(shootDirection.normalized * 10f);
-            bullet.GetComponent<Rigidbody2D>().linearVelocity = shootDirection.normalized * 10f; // Assurez-vous que bulletPrefab a un Rigidbody2D attaché
-
-            /*canShoot = false;
-            Invoke(nameof(ResetShoot), 5); // Assurez-vous que shootCooldown est défini*/
-        }
-    }
-
-    void ResetShoot()
-    {
-        canShoot = true;
+        attackBall.DoAttack(this, bulletPrefab);
     }
 }

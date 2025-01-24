@@ -1,4 +1,5 @@
 using UnityEngine;
+using Assets.Script.Models;
 
 namespace Models
 {
@@ -20,9 +21,9 @@ namespace Models
         public bool inFire = false;
         public bool test = true;
 
-        [Header("References")]
+        [Header("Attacks")]
+        public AttackBall attackBall;
 
-        public GameObject bulletPrefab;
 
         public void TakeDamage(int damage)
         {
