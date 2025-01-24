@@ -2729,7 +2729,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playlist:
+  - {fileID: 8300000, guid: 4968725c9ffea9641991d78d1a5ecd60, type: 3}
+  - {fileID: 8300000, guid: ed7f0ed44ddc33a4f82e125bbfd5ef54, type: 3}
   - {fileID: 8300000, guid: 73083e916b1942240bc147ea6c4c3fd2, type: 3}
+  - {fileID: 8300000, guid: 12ee69644df918d4097613ec83671010, type: 3}
   audioSource: {fileID: 252659003}
 --- !u!82 &252659003
 AudioSource:
@@ -2837,7 +2840,7 @@ Transform:
   m_GameObject: {fileID: 252659001}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 489.94174, y: 218.43912, z: -2.5495088}
+  m_LocalPosition: {x: 21, y: 28, z: -2.5495088}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4770,7 +4773,7 @@ Transform:
   m_GameObject: {fileID: 1001322284}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0.62, y: 7.15, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5028,7 +5031,7 @@ Transform:
   m_GameObject: {fileID: 1774422616}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.44, y: 7.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5230,8 +5233,6 @@ MonoBehaviour:
   stun: 0
   inFire: 0
   test: 1
-  hasMelody1: 0
-  hasMelody2: 0
   bulletPrefab: {fileID: 0}
 --- !u!212 &1987920506
 SpriteRenderer:

@@ -11,7 +11,7 @@ public class PlayerController : PlayerCharacter
     private bool canShoot = true;
 
     [SerializeField] // Rendre visible dans l'Inspector
-    private bool hasMelody1 = false; // Utilisé pour l'inspector
+    public static bool hasMelody1 = false; // Utilisé pour l'inspector
     public bool HasMelody1 
     { 
         get => hasMelody1; 
@@ -19,7 +19,7 @@ public class PlayerController : PlayerCharacter
     }
 
     [SerializeField] // Rendre visible dans l'Inspector
-    private bool hasMelody2 = false; // Utilisé pour l'inspector
+    public static bool hasMelody2 = false; // Utilisé pour l'inspector
     public bool HasMelody2 
     { 
         get => hasMelody2; 
