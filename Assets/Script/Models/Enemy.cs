@@ -1,4 +1,5 @@
-﻿using Models;
+﻿using System.Collections;
+using Models;
 using UnityEngine;
 
 namespace Assets.Script.Models
@@ -9,7 +10,13 @@ namespace Assets.Script.Models
 
         private void Start()
         {
+            StartCoroutine(disableThis());
+        }
 
+        private IEnumerator disableThis()
+        {
+            yield return new WaitForEndOfFrame();
+            gameObject.SetActive(false);
         }
 
         private void OnTriggerEnter2D(Collider2D other)

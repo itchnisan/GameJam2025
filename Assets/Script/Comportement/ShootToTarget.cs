@@ -25,6 +25,8 @@ public class ShootToTarget : MonoBehaviour
         {
             targetTransform = GameObject.FindGameObjectWithTag("Player").transform;
         }
+
+        StartCoroutine(reduceCD());
     }
 
     // Update is called once per frame
