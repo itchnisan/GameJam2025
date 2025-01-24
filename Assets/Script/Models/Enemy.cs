@@ -17,8 +17,20 @@ namespace Assets.Script.Models
             Debug.Log("quoicoube1");
             if (other.CompareTag("PlayerAttack"))
             {
-                Attack attack = other.GetComponent<Attack>();
-                TakeDamage(attack);
+                PlayerCharacter player = other.GetComponentInParent<PlayerCharacter>();
+                Rigidbody2D rb = other.GetComponentInParent<Rigidbody2D>();
+                if(rb == null) {
+                    TakeDamage(player.attackBall);
+                    Debug.Log("rb null");
+                }
+                
+                if(player == null) {
+                    Debug.Log("player null");
+                }
+                else {
+                TakeDamage(player.attackBall,rb.linearVelocity);
+                }
+                
                 
             }
         }

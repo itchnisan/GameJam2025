@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8834275254905740711}
   - component: {fileID: -4179694701671732548}
   - component: {fileID: 6921611556054656944}
+  - component: {fileID: 658897362307492359}
   m_Layer: 0
   m_Name: BulletPrefab
   m_TagString: PlayerAttack
@@ -152,3 +153,30 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.1
+--- !u!114 &658897362307492359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5156471235371309508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7407b3667337ec43857e125127ad254, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 50
+  health: 50
+  damage: 20
+  walkSpeed: 100
+  run: 0
+  knockbackTime: 0
+  invincibilitySecondes: 0
+  targetPosition: {x: 0, y: 0}
+  stun: 0
+  inFire: 0
+  test: 1
+  canBeAttacked: 1
+  attackBall: {fileID: 11400000, guid: 3ebb4dc7aff9ba945b9b38d71b76f724, type: 2}
+  isCoroutineRunning: 0
+  bulletPrefab: {fileID: 0}

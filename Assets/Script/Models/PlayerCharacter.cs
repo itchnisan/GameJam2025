@@ -6,7 +6,7 @@ namespace Models
 {
     public class PlayerCharacter : Entity
     {
-        public bool canShoot = true;
+        //public bool canShoot = true;
 
         public bool isCoroutineRunning = false;
 
@@ -25,9 +25,19 @@ namespace Models
             if (collider.CompareTag("Enemy"))
             {
                 Debug.Log("attaque prise");
-                Attack attackComponent = collider.GetComponentInParent<Attack>();
-
-                //EnemyDamage(attackComponent);
+                Enemy enemy = collider.GetComponentInParent<Enemy>();
+                Rigidbody2D rb = collider.GetComponentInParent<Rigidbody2D>();
+                if(enemy == null) {
+                    Debug.Log("enemy null");
+                }
+                if(rb == null) {
+                    TakeDamage(enemy.attackBall);
+                    Debug.Log("rbenemy null");
+                }
+                
+                else {
+                TakeDamage(enemy.attackBall,rb.linearVelocity);
+                }
             }
         }
 
@@ -60,13 +70,6 @@ namespace Models
             yield return null;
             }
             Destroy(Projectile);
-        }
-
-        private void EnemyDamage(Attack attack)
-        {
-            TakeDamage(attack);
-
-            //TODO période d'invincibilité
         }
     }
 }

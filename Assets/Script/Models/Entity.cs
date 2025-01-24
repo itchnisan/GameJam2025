@@ -30,9 +30,10 @@ namespace Models
         public AttackBall attackBall;
 
 
-        public void TakeDamage(Attack attack)
+        public void TakeDamage(Attack attack, Vector2? velocity = null)
         {
-            if(canBeAttacked){
+            if (canBeAttacked)
+            {
                 health -= attack.damage;
 
                 if (health <= 0)
@@ -46,10 +47,12 @@ namespace Models
                 Stun(rb);
 
                 Vector2 knockbackTarget;
-
-                if (attack.velocity.magnitude > 0.01f)
+                if(velocity == null) {
+                    velocity = Vector2.zero;
+                }
+                if (velocity.HasValue && velocity.Value.magnitude > 0.01f)
                 {
-                    knockbackTarget = attack.velocity;
+                    knockbackTarget = (Vector2)velocity;
                 }
                 else
                 {

@@ -6,7 +6,7 @@ public class PlayerController : PlayerCharacter
 {
     private bool isMoving = false;
 
-    private bool canShoot = true;
+    //private bool canShoot = true;
 
     private Rigidbody2D rb;
 

@@ -18,9 +18,6 @@ namespace Assets.Script.Models
         public float attackCooldown;
         public bool unlock;
 
-        public Vector2 velocity;
-
-        public Rigidbody2D rb;
 
         public Attack()
         {
@@ -49,11 +46,6 @@ namespace Assets.Script.Models
                 return true;
             }
             return false;
-        }
-
-        private void Start()
-        {
-            velocity = rb.linearVelocity;
         }
     }
 }
