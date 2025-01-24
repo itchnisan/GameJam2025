@@ -18,10 +18,25 @@ public class AIStayAway : MobAI
     {
         if (playerPosition != null && monsterRB != null)
         {
+
             float deltaX = playerPosition.position.x - monsterRB.transform.position.x;
             float deltaY = playerPosition.position.y - monsterRB.transform.position.y;
 
-            moveMonster(new Vector2(deltaX, deltaY));
+            Vector2 movement = new Vector2(deltaX, deltaY);
+
+            float currentDistance = Vector2.Distance(monsterRB.position, playerPosition.position);
+
+            if (-0.1f < currentDistance && currentDistance < 0.1f)
+            {
+                monsterRB.linearVelocity = Vector2.zero;
+            } else if (currentDistance < distance)
+            {
+                moveMonster(movement * -1);
+            } else
+            {
+                moveMonster(movement);
+            }
+
         }
         //implique qu'un des 2 soit mort   
     }

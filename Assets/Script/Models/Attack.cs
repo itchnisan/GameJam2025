@@ -1,10 +1,10 @@
-﻿using Models;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Script.Models
 {
     [System.Serializable]
-    public class Attack : ScriptableObject    {
+    public class Attack : ScriptableObject
+    {
         public int damage;
         public float knockback;
 
@@ -22,7 +22,7 @@ namespace Assets.Script.Models
         public Attack()
         {
             damage = 10;
-            knockback = 1; 
+            knockback = 1;
             attackRange = 1;
             attackDuration = 1;
             attackDurationMax = 1;
@@ -39,7 +39,8 @@ namespace Assets.Script.Models
 
         }
 
-        public bool canAttack() {
+        public bool canAttack()
+        {
             if (attackCooldown == 0 && unlock)
             {
                 attackCooldown = attackCooldownMax;

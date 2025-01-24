@@ -1,7 +1,6 @@
 using System;
 using Assets.Script.Models;
 using Models;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class MobMovement : MonoBehaviour
@@ -61,11 +60,12 @@ public class MobMovement : MonoBehaviour
         if (!mobEntity.stun)
         {
             currentAI.onNextTick();
-        } else
+        }
+        else
         {
             //stun
             //mobRb.linearVelocity = Vector2.zero;
         }
-       
+
     }
 }

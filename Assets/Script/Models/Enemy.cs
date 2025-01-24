@@ -3,13 +3,13 @@ using UnityEngine;
 
 namespace Assets.Script.Models
 {
-    public class Enemy:Entity
+    public class Enemy : Entity
     {
-        
+
 
         private void Start()
         {
-            
+
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -19,19 +19,22 @@ namespace Assets.Script.Models
             {
                 PlayerCharacter player = other.GetComponentInParent<PlayerCharacter>();
                 Rigidbody2D rb = other.GetComponentInParent<Rigidbody2D>();
-                if(rb == null) {
+                if (rb == null)
+                {
                     TakeDamage(player.attackBall);
                     Debug.Log("rb null");
                 }
-                
-                if(player == null) {
+
+                if (player == null)
+                {
                     Debug.Log("player null");
                 }
-                else {
-                TakeDamage(player.attackBall,rb.linearVelocity);
+                else
+                {
+                    TakeDamage(player.attackBall, rb.linearVelocity);
                 }
-                
-                
+
+
             }
         }
 

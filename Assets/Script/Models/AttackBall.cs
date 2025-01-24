@@ -1,4 +1,3 @@
-using System.Collections;
 using Models;
 using UnityEngine;
 namespace Assets.Script.Models
@@ -22,20 +21,20 @@ namespace Assets.Script.Models
         {
             if (canAttack())
             {
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 shootDirection = mousePosition - player.transform.position;
+                Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Vector2 shootDirection = mousePosition - player.transform.position;
 
-            GameObject bullet = Instantiate(bulletPrefab, player.transform.position, Quaternion.identity);
-            bullet.GetComponent<Rigidbody2D>().linearVelocity = shootDirection.normalized * 10f; // vitesse de la bullet
+                GameObject bullet = Instantiate(bulletPrefab, player.transform.position, Quaternion.identity);
+                bullet.GetComponent<Rigidbody2D>().linearVelocity = shootDirection.normalized * 10f; // vitesse de la bullet
 
-            player.StartCoroutine(player.cd(this));
-            //player.StartCoroutine(player.lifeTime(bullet));
+                player.StartCoroutine(player.cd(this));
+                //player.StartCoroutine(player.lifeTime(bullet));
 
-            Vector3 targetPosition = player.transform.position + (Vector3)(shootDirection.normalized * attackRange);
-            player.StartCoroutine(player.DestroyProjectileAfterRange(bullet, targetPosition));
+                Vector3 targetPosition = player.transform.position + (Vector3)(shootDirection.normalized * attackRange);
+                player.StartCoroutine(player.DestroyProjectileAfterRange(bullet, targetPosition));
             }
         }
 
-        
+
     }
 }

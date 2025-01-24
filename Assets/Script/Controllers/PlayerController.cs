@@ -1,4 +1,3 @@
-using Assets.Script.Models;
 using Models;
 using UnityEngine;
 
@@ -86,7 +85,7 @@ public class PlayerController : PlayerCharacter
         attackBall.DoAttack(this, bulletPrefab);
     }
 
-    
+
 
 
     private void MakeMove(Vector2 _movement, float moveSpeed)

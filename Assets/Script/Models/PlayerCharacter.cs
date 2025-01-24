@@ -10,7 +10,7 @@ namespace Models
 
         public bool isCoroutineRunning = false;
 
-         [Header("Bullet")]
+        [Header("Bullet")]
         public GameObject bulletPrefab;
 
 
@@ -27,37 +27,44 @@ namespace Models
                 Debug.Log("attaque prise");
                 Enemy enemy = collider.GetComponentInParent<Enemy>();
                 Rigidbody2D rb = collider.GetComponentInParent<Rigidbody2D>();
-                if(enemy == null) {
+                if (enemy == null)
+                {
                     Debug.Log("enemy null");
                 }
-                if(rb == null) {
+                if (rb == null)
+                {
                     TakeDamage(enemy.attackBall);
                     Debug.Log("rbenemy null");
                 }
-                
-                else {
-                TakeDamage(enemy.attackBall,rb.linearVelocity);
+
+                else
+                {
+                    TakeDamage(enemy.attackBall, rb.linearVelocity);
                 }
             }
         }
 
-        public IEnumerator cd(Attack attack) {
+        public IEnumerator cd(Attack attack)
+        {
             isCoroutineRunning = true;
-            while(attack.attackCooldown > 0) {
+            while (attack.attackCooldown > 0)
+            {
                 attack.attackCooldown--;
                 Debug.Log("Countdown : " + attack.attackCooldown);
                 yield return new WaitForSeconds(1);
-                
+
             }
             isCoroutineRunning = false;
         }
 
-        public IEnumerator lifeTime(GameObject obj,Attack attack) {
-            while(attack.attackDuration > 0) {
+        public IEnumerator lifeTime(GameObject obj, Attack attack)
+        {
+            while (attack.attackDuration > 0)
+            {
                 attack.attackDuration--;
                 Debug.Log("duration : " + attack.attackDuration);
                 yield return new WaitForSeconds(1);
-                
+
             }
             attack.attackDuration = attack.attackDurationMax;
             Destroy(obj);
@@ -67,7 +74,7 @@ namespace Models
         {
             while (Vector3.Distance(Projectile.transform.position, targetPosition) > 0.1f)
             {
-            yield return null;
+                yield return null;
             }
             Destroy(Projectile);
         }

@@ -41,13 +41,14 @@ namespace Models
                     Die();
                 }
 
-                StopAllCoroutines(); //attention peut etre dangereux
+                //StopAllCoroutines(); //attention peut etre dangereux
                 Rigidbody2D rb = GetComponent<Rigidbody2D>();
 
                 Stun(rb);
 
                 Vector2 knockbackTarget;
-                if(velocity == null) {
+                if (velocity == null)
+                {
                     velocity = Vector2.zero;
                 }
                 if (velocity.HasValue && velocity.Value.magnitude > 0.01f)

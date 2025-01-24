@@ -21,7 +21,7 @@
 
     void Start()
     {
-       ai = (AIStayAway) base.baseStart();
+        ai = (AIStayAway)base.baseStart();
         ai.distance = beginDistance;
     }
 }
