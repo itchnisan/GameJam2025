@@ -1,11 +1,15 @@
 using System;
+using Assets.Script.Models;
 using Models;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class MobMovement : MonoBehaviour
 {
     private Func<Rigidbody2D, Transform, float, MobAI> fn;
     public MobAI currentAI;
+    private Enemy mobEntity;
+    private Rigidbody2D mobRb;
 
     private GameObject player;
 
@@ -38,7 +42,8 @@ public class MobMovement : MonoBehaviour
     public void baseStart()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-
+        mobEntity = GetComponent<Enemy>();
+        mobRb = GetComponent<Rigidbody2D>();
         initAI();
     }
 
@@ -50,6 +55,14 @@ public class MobMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        currentAI.onNextTick();
+        if (!mobEntity.stun)
+        {
+            currentAI.onNextTick();
+        } else
+        {
+            //stun
+            //mobRb.linearVelocity = Vector2.zero;
+        }
+       
     }
 }

@@ -21,7 +21,7 @@ public class AIRun : MobAI
 
             moveMonster(new Vector2(deltaX, deltaY));
         }
-        //sinon implique qu'un des 2 soit mort   
+        //implique qu'un des 2 soit mort   
     }
 
     private void moveMonster(Vector2 _movement)

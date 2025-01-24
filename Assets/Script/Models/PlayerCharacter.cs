@@ -19,12 +19,13 @@ namespace Models
 
         void OnCollisionEnter2D(Collision2D collision)
         {
-            Debug.Log("ca marche");
+            //Debug.Log("ca marche");
             Collider2D collider = collision.collider;
 
             if (collider.CompareTag("Enemy"))
             {
-                //Attack attackComponent = collider.GetComponentsInParent<damage>();
+                Debug.Log("attaque prise");
+                Attack attackComponent = collider.GetComponentInParent<Attack>();
 
                 //EnemyDamage(attackComponent);
             }
@@ -63,7 +64,7 @@ namespace Models
 
         private void EnemyDamage(Attack attack)
         {
-            TakeDamage(attack.damage);
+            TakeDamage(attack);
 
             //TODO période d'invincibilité
         }
