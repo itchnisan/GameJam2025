@@ -64,6 +64,7 @@ public class PlayerController : PlayerCharacter
 
         if (Vector2.Distance(transform.position, targetPosition) < 0.1f)
         {
+            targetPosition = transform.position;
             isMoving = false;
         }
     }
@@ -87,5 +88,11 @@ public class PlayerController : PlayerCharacter
     void ResetShoot()
     {
         canShoot = true;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("bitch");
+        GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
     }
 }
