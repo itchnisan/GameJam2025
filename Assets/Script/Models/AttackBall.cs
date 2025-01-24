@@ -10,10 +10,11 @@ namespace Assets.Script.Models
         public AttackBall()
         {
             damage = 10;
-            knockback = 0;
-            attackRange = 10;
-            attackDuration = 4;
-            attackCooldownMax = 2;
+            knockback = 1;
+            attackRange = 10f;
+            attackDuration = 0;
+            attackDurationMax = 0;
+            attackCooldownMax = 3;
             attackCooldown = 0;
             unlock = true;
         }
@@ -25,9 +26,13 @@ namespace Assets.Script.Models
             Vector2 shootDirection = mousePosition - player.transform.position;
 
             GameObject bullet = Instantiate(bulletPrefab, player.transform.position, Quaternion.identity);
-            bullet.GetComponent<Rigidbody2D>().linearVelocity = shootDirection.normalized * 10f; // Assurez-vous que bulletPrefab a un Rigidbody2D attaché
+            bullet.GetComponent<Rigidbody2D>().linearVelocity = shootDirection.normalized * 10f; // vitesse de la bullet
 
-            player.StartCoroutine(player.cd());
+            player.StartCoroutine(player.cd(this));
+            //player.StartCoroutine(player.lifeTime(bullet));
+
+            Vector3 targetPosition = player.transform.position + (Vector3)(shootDirection.normalized * attackRange);
+            player.StartCoroutine(player.DestroyProjectileAfterRange(bullet, targetPosition));
             }
         }
 

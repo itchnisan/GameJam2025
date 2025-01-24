@@ -11,6 +11,7 @@ namespace Assets.Script.Models
         public float attackRange;
 
         public float attackDuration;
+        public float attackDurationMax;
 
         public float attackCooldownMax;
 
@@ -23,6 +24,7 @@ namespace Assets.Script.Models
             knockback = 1; 
             attackRange = 1;
             attackDuration = 1;
+            attackDurationMax = 1;
             attackCooldownMax = 1;
             attackCooldown = 0;
             unlock = true;

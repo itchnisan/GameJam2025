@@ -24,22 +24,43 @@ namespace Models
 
             if (collider.CompareTag("Enemy"))
             {
-                Attack attackComponent = collider.GetComponentsInParent<Attack>()[0];
+                //Attack attackComponent = collider.GetComponentsInParent<damage>();
 
-                EnemyDamage(attackComponent);
+                //EnemyDamage(attackComponent);
             }
         }
 
-        public IEnumerator cd() {
+        public IEnumerator cd(Attack attack) {
             isCoroutineRunning = true;
-            while(attackBall.attackCooldown > 0) {
-                attackBall.attackCooldown--;
-                Debug.Log("Countdown : " + attackBall.attackCooldown);
+            while(attack.attackCooldown > 0) {
+                attack.attackCooldown--;
+                Debug.Log("Countdown : " + attack.attackCooldown);
                 yield return new WaitForSeconds(1);
                 
             }
             isCoroutineRunning = false;
         }
+
+        public IEnumerator lifeTime(GameObject obj,Attack attack) {
+            while(attack.attackDuration > 0) {
+                attack.attackDuration--;
+                Debug.Log("duration : " + attack.attackDuration);
+                yield return new WaitForSeconds(1);
+                
+            }
+            attack.attackDuration = attack.attackDurationMax;
+            Destroy(obj);
+        }
+
+        public IEnumerator DestroyProjectileAfterRange(GameObject Projectile, Vector3 targetPosition)
+        {
+            while (Vector3.Distance(Projectile.transform.position, targetPosition) > 0.1f)
+            {
+            yield return null;
+            }
+            Destroy(Projectile);
+        }
+
         private void EnemyDamage(Attack attack)
         {
             TakeDamage(attack.damage);
