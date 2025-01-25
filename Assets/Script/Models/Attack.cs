@@ -47,5 +47,15 @@ namespace Assets.Script.Models
         public virtual void DoAttack(PlayerCharacter player,GameObject bulletPrefab)
         {
         }
+
+        public bool canAttack(PlayerCharacter player) {
+            Debug.Log("attaque nom:" + this.name);
+            if (attackCooldown == 0 && unlock && !player.stun)
+            {
+                attackCooldown = attackCooldownMax;
+                return true;
+            }
+            return false;
     }
+}
 }

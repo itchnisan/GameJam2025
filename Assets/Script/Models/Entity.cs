@@ -139,17 +139,5 @@ namespace Models
             Destroy(gameObject);
         }
 
-        /// <summary>
-        /// Callback sent to all game objects before the application is quit.
-        /// </summary>
-
-        public bool canAttack(Attack attack) {
-            if (attack.attackCooldown == 0 && attack.unlock && !stun)
-            {
-                attack.attackCooldown = attack.attackCooldownMax;
-                return true;
-            }
-            return false;
-        }
-    }
+}
 }

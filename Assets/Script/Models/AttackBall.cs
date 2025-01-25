@@ -21,7 +21,7 @@ namespace Assets.Script.Models
         }
         public override void DoAttack(PlayerCharacter player, GameObject bulletPrefab)
         {
-            if (player.canAttack(this))
+            if (canAttack(player))
             {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 shootDirection = mousePosition - player.transform.position;

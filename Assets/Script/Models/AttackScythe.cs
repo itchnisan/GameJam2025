@@ -24,7 +24,7 @@ namespace Assets.Script.Models
         public override void DoAttack(PlayerCharacter player)
         {
             {
-    if (player.canAttack(this))
+    if (canAttack(player))
 {
     Debug.Log("attaque");
 
