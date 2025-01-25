@@ -1,7 +1,7 @@
 ﻿using Models;
 using UnityEngine;
 
-namespace Assets.Script.Models
+namespace Models
 {
     [System.Serializable]
     public class Attack : ScriptableObject    {

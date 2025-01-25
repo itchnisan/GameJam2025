@@ -1,8 +1,5 @@
 using System.Collections;
-using Assets.Script.Models;
 using UnityEngine;
-using Assets.Script.Models;
-
 namespace Models
 {
     public class Entity : MonoBehaviour

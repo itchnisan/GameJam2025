@@ -1,7 +1,7 @@
 using System.Collections;
 using Models;
 using UnityEngine;
-namespace Assets.Script.Models
+namespace Models
 {
     [CreateAssetMenu(fileName = "NewAttackBall", menuName = "Attack/AttackBall")]
     public class AttackBall : Attack
