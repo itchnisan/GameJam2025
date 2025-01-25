@@ -1,7 +1,6 @@
 using System.Collections;
 using Assets.Script.Models;
 using UnityEngine;
-using Assets.Script.Models;
 using UnityEngine.U2D.IK;
 
 namespace Models
@@ -31,6 +30,16 @@ namespace Models
 
         [Header("Attacks")]
         public Attack[] attacks;
+
+        void Start()
+        {
+            Debug.Log("attacks.Length: " + attacks.Length);
+                for (int i = 0; i < attacks.Length; i++)
+    {
+        attacks[i] = Instantiate(attacks[i]);
+        Debug.Log($"Attack {i} Instance ID: {attacks[i].GetInstanceID()}");
+    }
+        }
 
 
 
@@ -109,14 +118,12 @@ namespace Models
         }
 
                 public IEnumerator cd(Attack attack) {
-            isCoroutineRunning = true;
             while(attack.attackCooldown > 0) {
                 attack.attackCooldown--;
-                Debug.Log("Countdown : " + attack.attackCooldown);
+                Debug.Log("Countdown : " +attack.name + attack.attackCooldown);
                 yield return new WaitForSeconds(1);
                 
             }
-            isCoroutineRunning = false;
         }
 
         public IEnumerator lifeTime(GameObject obj,Attack attack) {

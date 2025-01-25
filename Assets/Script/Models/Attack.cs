@@ -17,6 +17,8 @@ namespace Assets.Script.Models
         public float attackCooldownMax;
 
         public float attackCooldown;
+
+        
         public bool unlock;
 
 
