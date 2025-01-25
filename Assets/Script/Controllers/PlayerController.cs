@@ -28,10 +28,17 @@ public class PlayerController : PlayerCharacter
             Debug.Log("OK");
         }
 
-        if (Input.GetKeyDown(KeyCode.A) && !isCoroutineRunning)
+        if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.Q)) && !isCoroutineRunning)
         {
             Debug.Log("AAAAAAAAAAAA");
             DoAttackScythe();
+        }
+
+        if ((Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.W)) && !isCoroutineRunning)
+        {
+            isMoving = false;
+            Debug.Log("TPPPPPPP");
+            DoTP();
         }
     }
 
@@ -94,6 +101,11 @@ public class PlayerController : PlayerCharacter
     void DoAttackScythe()
     {
         attacks[1].DoAttack(this);
+    }
+
+    void DoTP()
+    {
+        attacks[2].DoAttack(this);
     }
 
     

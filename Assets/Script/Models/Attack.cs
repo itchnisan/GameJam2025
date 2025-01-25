@@ -40,15 +40,6 @@ namespace Assets.Script.Models
 
         }
 
-        public bool canAttack() {
-            if (attackCooldown == 0 && unlock)
-            {
-                attackCooldown = attackCooldownMax;
-                return true;
-            }
-            return false;
-        }
-
         public virtual void DoAttack(PlayerCharacter player)
         {
         }

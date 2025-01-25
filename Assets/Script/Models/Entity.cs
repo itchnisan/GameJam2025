@@ -64,7 +64,7 @@ namespace Models
                 {
                     Debug.Log("3");
                     Debug.Log(rb.linearVelocity);
-                    knockbackTarget = rb.linearVelocity * -1;
+                    knockbackTarget = Vector2.one * -1;
                 }
                 Stun(rb,knockbackTarget * attack.knockback);
             }
@@ -90,6 +90,7 @@ namespace Models
         public IEnumerator InvincibilityFrames(float invincibilityTime)
         {
             canBeAttacked = false;
+            GetComponent<CircleCollider2D>().enabled = false;
 
             //A CHANGER AVEC UN VRAI TRUC
             SpriteRenderer sp = GetComponent<SpriteRenderer>();
@@ -99,6 +100,7 @@ namespace Models
             //
 
             yield return new WaitForSeconds(invincibilityTime);
+            GetComponent<CircleCollider2D>().enabled = true;
             canBeAttacked = true;
 
             //FIN
@@ -118,14 +120,9 @@ namespace Models
         }
 
         public IEnumerator lifeTime(GameObject obj,Attack attack) {
-            while(attack.attackDuration > 0) {
-                attack.attackDuration--;
-                Debug.Log("duration : " + attack.attackDuration);
-                yield return new WaitForSeconds(1);
-                
-            }
-            attack.attackDuration = attack.attackDurationMax;
-            Destroy(obj);
+                obj.GetComponent<PolygonCollider2D>().enabled = true;
+                yield return new WaitForSeconds(attack.attackDuration);
+                obj.GetComponent<PolygonCollider2D>().enabled = false;
         }
 
         public IEnumerator DestroyProjectileAfterRange(GameObject Projectile, Vector3 targetPosition)
@@ -140,6 +137,19 @@ namespace Models
         public void Die()
         {
             Destroy(gameObject);
+        }
+
+        /// <summary>
+        /// Callback sent to all game objects before the application is quit.
+        /// </summary>
+
+        public bool canAttack(Attack attack) {
+            if (attack.attackCooldown == 0 && attack.unlock && !stun)
+            {
+                attack.attackCooldown = attack.attackCooldownMax;
+                return true;
+            }
+            return false;
         }
     }
 }

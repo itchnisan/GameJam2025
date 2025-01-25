@@ -17,6 +17,6 @@ MonoBehaviour:
   attackRange: 10
   attackDuration: 4
   attackDurationMax: 4
-  attackCooldownMax: 2
+  attackCooldownMax: 1
   attackCooldown: 0
   unlock: 1

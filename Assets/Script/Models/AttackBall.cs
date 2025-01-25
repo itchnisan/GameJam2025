@@ -1,5 +1,6 @@
 using System.Collections;
 using Models;
+using Unity.VisualScripting;
 using UnityEngine;
 namespace Assets.Script.Models
 {
@@ -20,13 +21,14 @@ namespace Assets.Script.Models
         }
         public override void DoAttack(PlayerCharacter player, GameObject bulletPrefab)
         {
-            if (canAttack())
+            if (player.canAttack(this))
             {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 shootDirection = mousePosition - player.transform.position;
 
             GameObject bullet = Instantiate(bulletPrefab, player.transform.position, Quaternion.identity);
             bullet.GetComponent<Rigidbody2D>().linearVelocity = shootDirection.normalized * 10f; // vitesse de la bullet
+            
 
             player.StartCoroutine(player.cd(this));
             //player.StartCoroutine(player.lifeTime(bullet));
@@ -36,6 +38,6 @@ namespace Assets.Script.Models
             }
         }
 
-        
+
     }
 }

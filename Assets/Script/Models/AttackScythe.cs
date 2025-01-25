@@ -13,7 +13,7 @@ namespace Assets.Script.Models
         {
             damage = 5;
             knockback = 0.75f;
-            attackRange = 10f;
+            attackRange = 3;
             attackDuration = 0;
             attackDurationMax = 0;
             attackCooldownMax = 5;
@@ -21,16 +21,15 @@ namespace Assets.Script.Models
             unlock = true;
         }
 
-
         public override void DoAttack(PlayerCharacter player)
         {
             {
-    if (canAttack())
+    if (player.canAttack(this))
 {
     Debug.Log("attaque");
 
-    CircleFollow circle = player.GetComponentInParent<CircleFollow>();
 
+    CircleFollow circle = player.GetComponentInParent<CircleFollow>();
     Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mouseWorldPosition.z = 0; // S'assurer que la position Z correspond à votre plan 2D
 
@@ -42,9 +41,7 @@ namespace Assets.Script.Models
 
         // Appliquer la rotation au cercle
         circle.circle.transform.rotation = Quaternion.Euler(0, 0, angle-180f);
-
-    PolygonCollider2D collider = circle.GetComponent<PolygonCollider2D>();    
-
+    player.StartCoroutine(player.lifeTime(circle.circle,this));
     // Lancer le cooldown de l'attaque
     player.StartCoroutine(player.cd(this));
 }

@@ -42,5 +42,17 @@ namespace Models
                 }
             }
         }
+
+                /// <summary>
+        /// Callback sent to all game objects before the application is quit.
+        /// </summary>
+        void OnApplicationQuit()
+        {
+            Debug.Log("Application ending after " + Time.time + " seconds");
+            foreach (Attack attack in attacks)
+            {
+                attack.attackCooldown = 0;
+            } 
+        }
     }
 }
