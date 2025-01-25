@@ -28485,6 +28485,7 @@ MonoBehaviour:
   itemInside: {fileID: 1559936232}
   spawnPoint: {fileID: 1255495207}
   melodyNumber: 1
+  chestOpened: {fileID: 724664966, guid: d28a661fe0b025b4ab57084a5e4c2524, type: 3}
   animator: {fileID: 0}
 --- !u!61 &1255495210
 BoxCollider2D:
@@ -32793,6 +32794,7 @@ MonoBehaviour:
   itemInside: {fileID: 1522430608}
   spawnPoint: {fileID: 1390229297}
   melodyNumber: 2
+  chestOpened: {fileID: 724664966, guid: d28a661fe0b025b4ab57084a5e4c2524, type: 3}
   animator: {fileID: 0}
 --- !u!61 &1390229295
 BoxCollider2D:
@@ -38324,6 +38326,7 @@ MonoBehaviour:
   itemInside: {fileID: 743466173}
   spawnPoint: {fileID: 1807832974}
   melodyNumber: 3
+  chestOpened: {fileID: 724664966, guid: d28a661fe0b025b4ab57084a5e4c2524, type: 3}
   animator: {fileID: 0}
 --- !u!61 &1807832972
 BoxCollider2D:

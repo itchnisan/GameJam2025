@@ -1,3 +1,4 @@
+using System.Collections;
 using Models;
 using UnityEngine;
 
@@ -64,14 +65,19 @@ public class PlayerController : PlayerCharacter
 
         if (Input.GetKeyDown(KeyCode.Space) && !isCoroutineARunning)
         {
+            animator.SetBool("isAttacking", true);
             DoAttackBall();
             Debug.Log("OK");
+
+            StartCoroutine(resetIsAttacking());
         }
 
         if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.Q)) && !isCoroutineBRunning)
         {
             /*Debug.Log("AAAAAAAAAAAA");*/
+            animator.SetBool("isAttacking", true);
             DoAttackScythe();
+            StartCoroutine(resetIsAttacking());
         }
 
         if ((Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.W)) && !isCoroutineBRunning)
@@ -166,6 +172,7 @@ public class PlayerController : PlayerCharacter
     void DoAttackScythe()
     {
         attacks[1].DoAttack(this);
+        
     }
 
     void DoTP()
@@ -173,7 +180,12 @@ public class PlayerController : PlayerCharacter
         attacks[2].DoAttack(this);
     }
 
-    
+    private IEnumerator resetIsAttacking()
+    {
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        animator.SetBool("isAttacking", false);
+    }
 
 
     private void MakeMove(Vector2 _movement, float moveSpeed)

@@ -1,12 +1,18 @@
+using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Chest : MonoBehaviour
 {
     public GameObject itemInside; 
     public Transform spawnPoint; 
-    public int melodyNumber = 0;  
+    public int melodyNumber = 0;
+
+    public Sprite chestOpened;
 
     public Animator animator;
+
+    public bool isLast;
 
     private bool isPlayerNearby = false;
     private bool isOpened = false;
@@ -34,8 +40,11 @@ public class Chest : MonoBehaviour
         if (itemInside != null && spawnPoint != null)
         {
             Instantiate(itemInside, spawnPoint.position, spawnPoint.rotation);
+            
         }
         
+        GetComponentInParent<SpriteRenderer>().sprite = chestOpened;
+
         Debug.Log("Le coffre a été ouvert !");
 
         CollectMelodyForPlayer();
@@ -52,8 +61,18 @@ public class Chest : MonoBehaviour
             {
                 playerController.CollectMelody(melodyNumber);
                 Debug.Log($"Le joueur a récupéré la mélodie {melodyNumber} !");
+
+                if (isLast)
+                {
+                    LastOpenning();
+                }
             }
         }
+    }
+
+    private void LastOpenning()
+    {
+        SceneManager.LoadScene("end", LoadSceneMode.Single);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
