@@ -44,11 +44,23 @@ public class PlayerController : PlayerCharacter
 
         HandleMovementInput();
 
-        if (Input.GetKeyDown(KeyCode.Space) && !isCoroutineRunning)
+        if (Input.GetKeyDown(KeyCode.Space) && !isCoroutineARunning)
         {
             DoAttackBall();
-
             Debug.Log("OK");
+        }
+
+        if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.Q)) && !isCoroutineBRunning)
+        {
+            Debug.Log("AAAAAAAAAAAA");
+            DoAttackScythe();
+        }
+
+        if ((Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.W)) && !isCoroutineBRunning)
+        {
+            isMoving = false;
+            Debug.Log("TPPPPPPP");
+            DoTP();
         }
     }
 
@@ -122,7 +134,17 @@ public class PlayerController : PlayerCharacter
     }
     void DoAttackBall()
     {
-        attackBall.DoAttack(this, bulletPrefab);
+        attacks[0].DoAttack(this, bulletPrefab);
+    }
+
+    void DoAttackScythe()
+    {
+        attacks[1].DoAttack(this);
+    }
+
+    void DoTP()
+    {
+        attacks[2].DoAttack(this);
     }
 
     

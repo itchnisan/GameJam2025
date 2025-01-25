@@ -9,13 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cff071f9d6da7724f9f30cbe969c21db, type: 3}
-  m_Name: test
+  m_Script: {fileID: 11500000, guid: 2a48ce8a3ea9b0644a50fb94d6fde11d, type: 3}
+  m_Name: AttackScythe
   m_EditorClassIdentifier: 
-  damage: 10
-  knockback: 0
+  damage: 20
+  knockback: 10
   attackRange: 10
-  attackDuration: 4
-  attackCooldownMax: 2
+  attackDuration: 0
+  attackDurationMax: 0
+  attackCooldownMax: 1
   attackCooldown: 0
   unlock: 1

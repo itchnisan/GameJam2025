@@ -1,5 +1,7 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.U2D.IK;
+
 namespace Models
 {
     public class Entity : MonoBehaviour
@@ -16,6 +18,10 @@ namespace Models
 
         public Vector2 targetPosition;
 
+        public bool isCoroutineARunning = false;
+        public bool isCoroutineBRunning = false;
+        public bool isCoroutineCRunning = false;
+
 
         [Header("States")]
         public bool stun = false;
@@ -24,7 +30,19 @@ namespace Models
         public bool canBeAttacked = true;
 
         [Header("Attacks")]
-        public AttackBall attackBall;
+        public Attack[] attacks;
+
+        void Start()
+        {
+            Debug.Log("attacks.Length: " + attacks.Length);
+                for (int i = 0; i < attacks.Length; i++)
+    {
+        attacks[i] = Instantiate(attacks[i]);
+        Debug.Log($"Attack {i} Instance ID: {attacks[i].GetInstanceID()}");
+    }
+        }
+
+
 
 
         public void TakeDamage(Attack attack, Vector2? velocity = null)
@@ -38,45 +56,51 @@ namespace Models
                     Die();
                 }
 
-                StopAllCoroutines(); //attention peut etre dangereux
-                Rigidbody2D rb = GetComponent<Rigidbody2D>();
-
-                Stun(rb);
+                //StopAllCoroutines(); //attention peut etre dangereux
+                Rigidbody2D rb = GetComponentInParent<Rigidbody2D>();
 
                 Vector2 knockbackTarget;
+                Debug.Log(velocity);
                 if(velocity == null) {
+                    Debug.Log("1");
                     velocity = Vector2.zero;
                 }
-                if (velocity.HasValue && velocity.Value.magnitude > 0.01f)
+                if (velocity.HasValue && velocity.Value.sqrMagnitude > 0.0001f)
                 {
+                    Debug.Log("2");
                     knockbackTarget = (Vector2)velocity;
                 }
                 else
                 {
-                    knockbackTarget = rb.linearVelocity * -1;
+                    Debug.Log("3");
+                    Debug.Log(rb.linearVelocity);
+                    knockbackTarget = Vector2.one * -1;
                 }
-
-                rb.AddForce(knockbackTarget * attack.knockback, ForceMode2D.Impulse);
+                Stun(rb,knockbackTarget * attack.knockback);
             }
         }
 
-        public void Stun(Rigidbody2D rb)
+        public void Stun(Rigidbody2D rb,Vector2 vect)
         {
-            rb.linearVelocity = Vector2.zero;
-            StartCoroutine(KnockbackStun());
+            
+            StartCoroutine(KnockbackStun(rb,vect));
             StartCoroutine(InvincibilityFrames(invincibilitySecondes));
         }
 
-        public IEnumerator KnockbackStun()
+        public IEnumerator KnockbackStun(Rigidbody2D rb,Vector2 vect)
         {
+            rb.linearVelocity = vect;
             stun = true;
             yield return new WaitForSeconds(knockbackTime);
             stun = false;
+            rb.linearVelocity = Vector2.zero;
+            
         }
 
         public IEnumerator InvincibilityFrames(float invincibilityTime)
         {
             canBeAttacked = false;
+            GetComponent<CircleCollider2D>().enabled = false;
 
             //A CHANGER AVEC UN VRAI TRUC
             SpriteRenderer sp = GetComponent<SpriteRenderer>();
@@ -86,6 +110,7 @@ namespace Models
             //
 
             yield return new WaitForSeconds(invincibilityTime);
+            GetComponent<CircleCollider2D>().enabled = true;
             canBeAttacked = true;
 
             //FIN
@@ -93,9 +118,56 @@ namespace Models
 
         }
 
+                public IEnumerator cdA(Attack attack) {
+                    isCoroutineARunning = true;
+            while(attack.attackCooldown > 0) {
+                attack.attackCooldown--;
+                Debug.Log("Countdown : " +attack.name + attack.attackCooldown);
+                yield return new WaitForSeconds(1);
+                
+            }
+            isCoroutineARunning = false;
+        }
+              public IEnumerator cdB(Attack attack) {
+                isCoroutineBRunning = true;
+            while(attack.attackCooldown > 0) {
+                attack.attackCooldown--;
+                Debug.Log("Countdown : " +attack.name + attack.attackCooldown);
+                yield return new WaitForSeconds(1);
+                
+            }
+            isCoroutineBRunning = false;
+        }
+              public IEnumerator cdC(Attack attack) {
+                isCoroutineCRunning = true;
+            while(attack.attackCooldown > 0) {
+                attack.attackCooldown--;
+                Debug.Log("Countdown : " +attack.name + attack.attackCooldown);
+                yield return new WaitForSeconds(1);
+                
+            }
+            isCoroutineCRunning = false;
+        }
+
+        public IEnumerator lifeTime(GameObject obj,Attack attack) {
+                obj.GetComponent<PolygonCollider2D>().enabled = true;
+                yield return new WaitForSeconds(attack.attackDuration);
+                obj.GetComponent<PolygonCollider2D>().enabled = false;
+        }
+
+        public IEnumerator DestroyProjectileAfterRange(GameObject Projectile, Vector3 targetPosition)
+        {
+            while (Vector3.Distance(Projectile.transform.position, targetPosition) > 0.1f)
+            {
+            yield return null;
+            }
+            Destroy(Projectile);
+        }
+
         public void Die()
         {
             Destroy(gameObject);
         }
-    }
+
+}
 }

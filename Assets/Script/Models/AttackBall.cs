@@ -1,5 +1,6 @@
 using System.Collections;
 using Models;
+using Unity.VisualScripting;
 using UnityEngine;
 namespace Models
 {
@@ -10,7 +11,7 @@ namespace Models
         public AttackBall()
         {
             damage = 10;
-            knockback = 1;
+            knockback = 0.25f;
             attackRange = 10f;
             attackDuration = 0;
             attackDurationMax = 0;
@@ -18,17 +19,18 @@ namespace Models
             attackCooldown = 0;
             unlock = true;
         }
-        public void DoAttack(PlayerCharacter player, GameObject bulletPrefab)
+        public override void DoAttack(PlayerCharacter player, GameObject bulletPrefab)
         {
-            if (canAttack())
+            if (canAttack(player))
             {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 shootDirection = mousePosition - player.transform.position;
 
             GameObject bullet = Instantiate(bulletPrefab, player.transform.position, Quaternion.identity);
             bullet.GetComponent<Rigidbody2D>().linearVelocity = shootDirection.normalized * 10f; // vitesse de la bullet
+            
 
-            player.StartCoroutine(player.cd(this));
+            player.StartCoroutine(player.cdA(this));
             //player.StartCoroutine(player.lifeTime(bullet));
 
             Vector3 targetPosition = player.transform.position + (Vector3)(shootDirection.normalized * attackRange);
@@ -36,6 +38,6 @@ namespace Models
             }
         }
 
-        
+
     }
 }

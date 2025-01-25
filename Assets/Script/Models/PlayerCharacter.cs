@@ -8,10 +8,12 @@ namespace Models
     {
         //public bool canShoot = true;
 
-        public bool isCoroutineRunning = false;
+        
 
-        [Header("Bullet")]
+
+        [Header("References")]
         public GameObject bulletPrefab;
+        public GameObject scythePrefab;
 
 
         /*[Header("References")]
@@ -27,49 +29,31 @@ namespace Models
                 Debug.Log("attaque prise");
                 Enemy enemy = collider.GetComponentInParent<Enemy>();
                 Rigidbody2D rb = collider.GetComponentInParent<Rigidbody2D>();
+                Debug.Log(rb.linearVelocity);
                 if(enemy == null) {
                     Debug.Log("enemy null");
                 }
                 if(rb == null) {
-                    TakeDamage(enemy.attackBall);
+                    TakeDamage(enemy.attacks[0]);
                     Debug.Log("rbenemy null");
                 }
                 
                 else {
-                TakeDamage(enemy.attackBall,rb.linearVelocity);
+                TakeDamage(enemy.attacks[0],rb.linearVelocity);
                 }
             }
         }
 
-        public IEnumerator cd(Attack attack) {
-            isCoroutineRunning = true;
-            while(attack.attackCooldown > 0) {
-                attack.attackCooldown--;
-                Debug.Log("Countdown : " + attack.attackCooldown);
-                yield return new WaitForSeconds(1);
-                
-            }
-            isCoroutineRunning = false;
-        }
-
-        public IEnumerator lifeTime(GameObject obj,Attack attack) {
-            while(attack.attackDuration > 0) {
-                attack.attackDuration--;
-                Debug.Log("duration : " + attack.attackDuration);
-                yield return new WaitForSeconds(1);
-                
-            }
-            attack.attackDuration = attack.attackDurationMax;
-            Destroy(obj);
-        }
-
-        public IEnumerator DestroyProjectileAfterRange(GameObject Projectile, Vector3 targetPosition)
+                /// <summary>
+        /// Callback sent to all game objects before the application is quit.
+        /// </summary>
+        void OnApplicationQuit()
         {
-            while (Vector3.Distance(Projectile.transform.position, targetPosition) > 0.1f)
+            Debug.Log("Application ending after " + Time.time + " seconds");
+            foreach (Attack attack in attacks)
             {
-            yield return null;
-            }
-            Destroy(Projectile);
+                attack.attackCooldown = 0;
+            } 
         }
     }
 }
