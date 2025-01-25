@@ -22,7 +22,7 @@ public class PlayerController : PlayerCharacter
         get => hasMelody2; 
         private set => hasMelody2 = value; 
     }
-    public GameObject bulletPrefab;
+    
     private Rigidbody2D rb;
 
     private Vector3 reference = Vector3.zero;

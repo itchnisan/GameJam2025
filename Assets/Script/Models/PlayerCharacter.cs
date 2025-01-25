@@ -10,7 +10,7 @@ namespace Models
 
         public bool isCoroutineRunning = false;
 
-         [Header("Bullet")]
+        [Header("Bullet")]
         public GameObject bulletPrefab;
 
 
