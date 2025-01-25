@@ -7,6 +7,7 @@ public class MainMenu : MonoBehaviour
     public string levelToLoad = "aaa.unity";//le level a charger mais si y'en a qu'un ou rentre en dur
 
     public GameObject OptionsPanel;
+    public GameObject TutoPanel;
     public void StartGame()
     {
         SceneManager.LoadScene("Game-Test");
@@ -18,6 +19,14 @@ public class MainMenu : MonoBehaviour
     public void QuitOptions()
     {
         OptionsPanel.SetActive(false);
+    }
+    public void ControlButton()
+    {
+        TutoPanel.SetActive(true);
+    }
+    public void QuitControl()
+    {
+        TutoPanel.SetActive(false);
     }
     public void QuitGame()
     {
