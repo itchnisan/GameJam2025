@@ -14,15 +14,21 @@ namespace Assets.Script.Models
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            Debug.Log("quoicoube1");
+            int i = 0;
+            if (other.name == "AoeScythe") {
+                Debug.Log("scythe");
+                i = 1;
+            }
             if (other.CompareTag("PlayerAttack"))
             {
+                
+                Debug.Log(other.name);
                 PlayerCharacter player = other.GetComponent<PlayerCharacter>();
                 Rigidbody2D rb = other.GetComponent<Rigidbody2D>();
                 //Debug.Log(rb.linearVelocity);
                 if(rb == null) {
                     Debug.Log("rb null");
-                    TakeDamage(player.attacks[0]);
+                    TakeDamage(player.attacks[i]);
                     
                 }
                 
@@ -32,7 +38,7 @@ namespace Assets.Script.Models
 
                 else {
                 //Debug.Log(rb.linearVelocity);
-                TakeDamage(player.attacks[0],rb.linearVelocity);
+                TakeDamage(player.attacks[i],rb.linearVelocity);
                 }
                 
                 
@@ -44,7 +50,7 @@ namespace Assets.Script.Models
             Rigidbody2D rb = GetComponentInParent<Rigidbody2D>();
             if (collision.collider.CompareTag("Player"))
             {
-                StartCoroutine(base.KnockbackStun(rb));
+                StartCoroutine(base.KnockbackStun(rb,Vector2.zero));
             }
         }
     }

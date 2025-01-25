@@ -49,14 +49,8 @@ namespace Models
                 //StopAllCoroutines(); //attention peut etre dangereux
                 Rigidbody2D rb = GetComponentInParent<Rigidbody2D>();
 
-                Stun(rb);
-            }
-        }
-
-        public void TakeDameContinue(Attack attack,Vector2? velocity = null) {
-            Rigidbody2D rb = GetComponentInParent<Rigidbody2D>();
-            Vector2 knockbackTarget;
-            Debug.Log(velocity);
+                Vector2 knockbackTarget;
+                Debug.Log(velocity);
                 if(velocity == null) {
                     Debug.Log("1");
                     velocity = Vector2.zero;
@@ -72,24 +66,25 @@ namespace Models
                     Debug.Log(rb.linearVelocity);
                     knockbackTarget = rb.linearVelocity * -1;
                 }
-                rb.AddForce(knockbackTarget * attack.knockback, ForceMode2D.Impulse);
+                Stun(rb,knockbackTarget * attack.knockback);
+            }
         }
 
-        public void Stun(Rigidbody2D rb)
+        public void Stun(Rigidbody2D rb,Vector2 vect)
         {
             
-            StartCoroutine(KnockbackStun(rb));
+            StartCoroutine(KnockbackStun(rb,vect));
             StartCoroutine(InvincibilityFrames(invincibilitySecondes));
         }
 
-        public IEnumerator KnockbackStun(Rigidbody2D rb)
+        public IEnumerator KnockbackStun(Rigidbody2D rb,Vector2 vect)
         {
-            Vector2 oldVelocity = rb.linearVelocity;
-            rb.linearVelocity = Vector2.zero;
+            rb.linearVelocity = vect;
             stun = true;
             yield return new WaitForSeconds(knockbackTime);
             stun = false;
-            TakeDameContinue(attacks[0],oldVelocity);
+            rb.linearVelocity = Vector2.zero;
+            
         }
 
         public IEnumerator InvincibilityFrames(float invincibilityTime)
