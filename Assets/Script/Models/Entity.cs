@@ -19,7 +19,9 @@ namespace Models
 
         public Vector2 targetPosition;
 
-        public bool isCoroutineRunning = false;
+        public bool isCoroutineARunning = false;
+        public bool isCoroutineBRunning = false;
+        public bool isCoroutineCRunning = false;
 
 
         [Header("States")]
@@ -117,13 +119,35 @@ namespace Models
 
         }
 
-                public IEnumerator cd(Attack attack) {
+                public IEnumerator cdA(Attack attack) {
+                    isCoroutineARunning = true;
             while(attack.attackCooldown > 0) {
                 attack.attackCooldown--;
                 Debug.Log("Countdown : " +attack.name + attack.attackCooldown);
                 yield return new WaitForSeconds(1);
                 
             }
+            isCoroutineARunning = false;
+        }
+              public IEnumerator cdB(Attack attack) {
+                isCoroutineBRunning = true;
+            while(attack.attackCooldown > 0) {
+                attack.attackCooldown--;
+                Debug.Log("Countdown : " +attack.name + attack.attackCooldown);
+                yield return new WaitForSeconds(1);
+                
+            }
+            isCoroutineBRunning = false;
+        }
+              public IEnumerator cdC(Attack attack) {
+                isCoroutineCRunning = true;
+            while(attack.attackCooldown > 0) {
+                attack.attackCooldown--;
+                Debug.Log("Countdown : " +attack.name + attack.attackCooldown);
+                yield return new WaitForSeconds(1);
+                
+            }
+            isCoroutineCRunning = false;
         }
 
         public IEnumerator lifeTime(GameObject obj,Attack attack) {

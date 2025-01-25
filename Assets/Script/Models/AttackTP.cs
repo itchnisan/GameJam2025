@@ -41,7 +41,7 @@ namespace Assets.Script.Models
                 player.transform.position = mousePosition;
 
                 // Lancer le cooldown de l'attaque
-                player.StartCoroutine(player.cd(this));
+                player.StartCoroutine(player.cdC(this));
             }
 
             }

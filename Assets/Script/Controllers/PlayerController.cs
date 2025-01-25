@@ -22,19 +22,19 @@ public class PlayerController : PlayerCharacter
     {
         HandleMovementInput();
 
-        if (Input.GetKeyDown(KeyCode.Space) && attacks[0].attackCooldown <= 0)
+        if (Input.GetKeyDown(KeyCode.Space) && !isCoroutineARunning)
         {
             DoAttackBall();
             Debug.Log("OK");
         }
 
-        if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.Q)) && attacks[1].attackCooldown <= 0)
+        if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.Q)) && !isCoroutineBRunning)
         {
             Debug.Log("AAAAAAAAAAAA");
             DoAttackScythe();
         }
 
-        if ((Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.W)) && attacks[2].attackCooldown <= 0)
+        if ((Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.W)) && !isCoroutineBRunning)
         {
             isMoving = false;
             Debug.Log("TPPPPPPP");

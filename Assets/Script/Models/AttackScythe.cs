@@ -43,7 +43,7 @@ namespace Assets.Script.Models
         circle.circle.transform.rotation = Quaternion.Euler(0, 0, angle-180f);
     player.StartCoroutine(player.lifeTime(circle.circle,this));
     // Lancer le cooldown de l'attaque
-    player.StartCoroutine(player.cd(this));
+    player.StartCoroutine(player.cdB(this));
 }
 
 }

@@ -30,7 +30,7 @@ namespace Assets.Script.Models
             bullet.GetComponent<Rigidbody2D>().linearVelocity = shootDirection.normalized * 10f; // vitesse de la bullet
             
 
-            player.StartCoroutine(player.cd(this));
+            player.StartCoroutine(player.cdA(this));
             //player.StartCoroutine(player.lifeTime(bullet));
 
             Vector3 targetPosition = player.transform.position + (Vector3)(shootDirection.normalized * attackRange);
