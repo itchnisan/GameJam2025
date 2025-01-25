@@ -17,18 +17,22 @@ namespace Assets.Script.Models
             Debug.Log("quoicoube1");
             if (other.CompareTag("PlayerAttack"))
             {
-                PlayerCharacter player = other.GetComponentInParent<PlayerCharacter>();
-                Rigidbody2D rb = other.GetComponentInParent<Rigidbody2D>();
+                PlayerCharacter player = other.GetComponent<PlayerCharacter>();
+                Rigidbody2D rb = other.GetComponent<Rigidbody2D>();
+                //Debug.Log(rb.linearVelocity);
                 if(rb == null) {
-                    TakeDamage(player.attackBall);
                     Debug.Log("rb null");
+                    TakeDamage(player.attacks[0]);
+                    
                 }
                 
                 if(player == null) {
                     Debug.Log("player null");
                 }
+
                 else {
-                TakeDamage(player.attackBall,rb.linearVelocity);
+                //Debug.Log(rb.linearVelocity);
+                TakeDamage(player.attacks[0],rb.linearVelocity);
                 }
                 
                 
@@ -37,9 +41,10 @@ namespace Assets.Script.Models
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
+            Rigidbody2D rb = GetComponentInParent<Rigidbody2D>();
             if (collision.collider.CompareTag("Player"))
             {
-                StartCoroutine(base.KnockbackStun());
+                StartCoroutine(base.KnockbackStun(rb));
             }
         }
     }

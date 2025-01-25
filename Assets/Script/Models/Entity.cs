@@ -2,6 +2,7 @@ using System.Collections;
 using Assets.Script.Models;
 using UnityEngine;
 using Assets.Script.Models;
+using UnityEngine.U2D.IK;
 
 namespace Models
 {
@@ -19,6 +20,8 @@ namespace Models
 
         public Vector2 targetPosition;
 
+        public bool isCoroutineRunning = false;
+
 
         [Header("States")]
         public bool stun = false;
@@ -27,7 +30,9 @@ namespace Models
         public bool canBeAttacked = true;
 
         [Header("Attacks")]
-        public AttackBall attackBall;
+        public Attack[] attacks;
+
+
 
 
         public void TakeDamage(Attack attack, Vector2? velocity = null)
@@ -41,40 +46,50 @@ namespace Models
                     Die();
                 }
 
-                StopAllCoroutines(); //attention peut etre dangereux
-                Rigidbody2D rb = GetComponent<Rigidbody2D>();
+                //StopAllCoroutines(); //attention peut etre dangereux
+                Rigidbody2D rb = GetComponentInParent<Rigidbody2D>();
 
                 Stun(rb);
+            }
+        }
 
-                Vector2 knockbackTarget;
+        public void TakeDameContinue(Attack attack,Vector2? velocity = null) {
+            Rigidbody2D rb = GetComponentInParent<Rigidbody2D>();
+            Vector2 knockbackTarget;
+            Debug.Log(velocity);
                 if(velocity == null) {
+                    Debug.Log("1");
                     velocity = Vector2.zero;
                 }
-                if (velocity.HasValue && velocity.Value.magnitude > 0.01f)
+                if (velocity.HasValue && velocity.Value.sqrMagnitude > 0.0001f)
                 {
+                    Debug.Log("2");
                     knockbackTarget = (Vector2)velocity;
                 }
                 else
                 {
+                    Debug.Log("3");
+                    Debug.Log(rb.linearVelocity);
                     knockbackTarget = rb.linearVelocity * -1;
                 }
-
                 rb.AddForce(knockbackTarget * attack.knockback, ForceMode2D.Impulse);
-            }
         }
 
         public void Stun(Rigidbody2D rb)
         {
-            rb.linearVelocity = Vector2.zero;
-            StartCoroutine(KnockbackStun());
+            
+            StartCoroutine(KnockbackStun(rb));
             StartCoroutine(InvincibilityFrames(invincibilitySecondes));
         }
 
-        public IEnumerator KnockbackStun()
+        public IEnumerator KnockbackStun(Rigidbody2D rb)
         {
+            Vector2 oldVelocity = rb.linearVelocity;
+            rb.linearVelocity = Vector2.zero;
             stun = true;
             yield return new WaitForSeconds(knockbackTime);
             stun = false;
+            TakeDameContinue(attacks[0],oldVelocity);
         }
 
         public IEnumerator InvincibilityFrames(float invincibilityTime)
@@ -94,6 +109,37 @@ namespace Models
             //FIN
             sp.color = oldColor;
 
+        }
+
+                public IEnumerator cd(Attack attack) {
+            isCoroutineRunning = true;
+            while(attack.attackCooldown > 0) {
+                attack.attackCooldown--;
+                Debug.Log("Countdown : " + attack.attackCooldown);
+                yield return new WaitForSeconds(1);
+                
+            }
+            isCoroutineRunning = false;
+        }
+
+        public IEnumerator lifeTime(GameObject obj,Attack attack) {
+            while(attack.attackDuration > 0) {
+                attack.attackDuration--;
+                Debug.Log("duration : " + attack.attackDuration);
+                yield return new WaitForSeconds(1);
+                
+            }
+            attack.attackDuration = attack.attackDurationMax;
+            Destroy(obj);
+        }
+
+        public IEnumerator DestroyProjectileAfterRange(GameObject Projectile, Vector3 targetPosition)
+        {
+            while (Vector3.Distance(Projectile.transform.position, targetPosition) > 0.1f)
+            {
+            yield return null;
+            }
+            Destroy(Projectile);
         }
 
         public void Die()

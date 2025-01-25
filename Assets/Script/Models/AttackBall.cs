@@ -10,7 +10,7 @@ namespace Assets.Script.Models
         public AttackBall()
         {
             damage = 10;
-            knockback = 1;
+            knockback = 0.25f;
             attackRange = 10f;
             attackDuration = 0;
             attackDurationMax = 0;
@@ -18,7 +18,7 @@ namespace Assets.Script.Models
             attackCooldown = 0;
             unlock = true;
         }
-        public void DoAttack(PlayerCharacter player, GameObject bulletPrefab)
+        public override void DoAttack(PlayerCharacter player, GameObject bulletPrefab)
         {
             if (canAttack())
             {

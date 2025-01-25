@@ -173,10 +173,13 @@ MonoBehaviour:
   knockbackTime: 0
   invincibilitySecondes: 0
   targetPosition: {x: 0, y: 0}
+  isCoroutineRunning: 0
   stun: 0
   inFire: 0
   test: 1
   canBeAttacked: 1
-  attackBall: {fileID: 11400000, guid: 3ebb4dc7aff9ba945b9b38d71b76f724, type: 2}
-  isCoroutineRunning: 0
+  attacks:
+  - {fileID: 11400000, guid: 3ebb4dc7aff9ba945b9b38d71b76f724, type: 2}
+  - {fileID: 11400000, guid: e773f3e86c6fb3e4098c6d435dacf049, type: 2}
   bulletPrefab: {fileID: 0}
+  scythePrefab: {fileID: 0}

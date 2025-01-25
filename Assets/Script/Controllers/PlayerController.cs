@@ -25,8 +25,13 @@ public class PlayerController : PlayerCharacter
         if (Input.GetKeyDown(KeyCode.Space) && !isCoroutineRunning)
         {
             DoAttackBall();
-
             Debug.Log("OK");
+        }
+
+        if (Input.GetKeyDown(KeyCode.A) && !isCoroutineRunning)
+        {
+            Debug.Log("AAAAAAAAAAAA");
+            DoAttackScythe();
         }
     }
 
@@ -83,7 +88,12 @@ public class PlayerController : PlayerCharacter
 
     void DoAttackBall()
     {
-        attackBall.DoAttack(this, bulletPrefab);
+        attacks[0].DoAttack(this, bulletPrefab);
+    }
+
+    void DoAttackScythe()
+    {
+        attacks[1].DoAttack(this);
     }
 
     

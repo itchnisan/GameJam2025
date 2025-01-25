@@ -4,6 +4,7 @@ using UnityEngine;
 namespace Assets.Script.Models
 {
     [System.Serializable]
+    
     public class Attack : ScriptableObject    {
         public int damage;
         public float knockback;
@@ -21,12 +22,12 @@ namespace Assets.Script.Models
 
         public Attack()
         {
-            damage = 10;
-            knockback = 1; 
-            attackRange = 1;
-            attackDuration = 1;
-            attackDurationMax = 1;
-            attackCooldownMax = 1;
+            damage = 0;
+            knockback = 0; 
+            attackRange = 0;
+            attackDuration = 0;
+            attackDurationMax = 0;
+            attackCooldownMax = 0;
             attackCooldown = 0;
             unlock = true;
         }
@@ -46,6 +47,14 @@ namespace Assets.Script.Models
                 return true;
             }
             return false;
+        }
+
+        public virtual void DoAttack(PlayerCharacter player)
+        {
+        }
+
+        public virtual void DoAttack(PlayerCharacter player,GameObject bulletPrefab)
+        {
         }
     }
 }
