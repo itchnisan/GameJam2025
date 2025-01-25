@@ -188,16 +188,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14f2b11e7c287fa45b9e53cc5b1b151b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
-  health: 10
+  maxHealth: 100
+  health: 100
   damage: 2
   walkSpeed: 50
   run: 0
   knockbackTime: 0.25
   invincibilitySecondes: 0.25
   targetPosition: {x: 0, y: 0}
+  isCoroutineARunning: 0
+  isCoroutineBRunning: 0
+  isCoroutineCRunning: 0
   stun: 0
   inFire: 0
   test: 1
   canBeAttacked: 1
-  attackBall: {fileID: 11400000, guid: 3ebb4dc7aff9ba945b9b38d71b76f724, type: 2}
+  attacks:
+  - {fileID: 11400000, guid: 3ebb4dc7aff9ba945b9b38d71b76f724, type: 2}
+  - {fileID: 11400000, guid: e773f3e86c6fb3e4098c6d435dacf049, type: 2}
+  - {fileID: 11400000, guid: b036cb9a15daffc42b736999795d3114, type: 2}

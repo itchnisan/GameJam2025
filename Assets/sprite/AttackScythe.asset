@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: AttackScythe
   m_EditorClassIdentifier: 
   damage: 20
-  knockback: 10
+  knockback: 4
   attackRange: 10
-  attackDuration: 0
+  attackDuration: 2
   attackDurationMax: 0
-  attackCooldownMax: 1
+  attackCooldownMax: 3
   attackCooldown: 0
   unlock: 1

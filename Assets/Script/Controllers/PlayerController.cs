@@ -17,11 +17,29 @@ public class PlayerController : PlayerCharacter
 
     [SerializeField] // Rendre visible dans l'Inspector
     public static bool hasMelody2 = false; // Utilisé pour l'inspector
-    public bool HasMelody2 
-    { 
-        get => hasMelody2; 
-        private set => hasMelody2 = value; 
+    public bool HasMelody2
+    {
+        get => hasMelody2;
+        private set => hasMelody2 = value;
     }
+
+    [SerializeField] // Rendre visible dans l'Inspector
+    public static bool hasMelody3 = false; // Utilisé pour l'inspector
+    public bool HasMelody3
+    {
+        get => hasMelody3;
+        private set => hasMelody3 = value;
+    }
+
+    [SerializeField] // Rendre visible dans l'Inspector
+    public static bool hasMelody4 = false; // Utilisé pour l'inspector
+    public bool HasMelody4
+    {
+        get => hasMelody4;
+        private set => hasMelody4 = value;
+    }
+
+    
     
     private Rigidbody2D rb;
 
@@ -52,7 +70,7 @@ public class PlayerController : PlayerCharacter
 
         if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.Q)) && !isCoroutineBRunning)
         {
-            Debug.Log("AAAAAAAAAAAA");
+            /*Debug.Log("AAAAAAAAAAAA");*/
             DoAttackScythe();
         }
 
@@ -126,6 +144,14 @@ public class PlayerController : PlayerCharacter
             case 2:
                 HasMelody2 = true;
                 Debug.Log("Melody 2 récupérée !");
+                break;
+            case 3:
+                HasMelody3 = true;
+                Debug.Log("Melody 3 récupérée !");
+                break;
+            case 4:
+                HasMelody4 = true;
+                Debug.Log("Melody 4 récupérée !");
                 break;
             default:
                 Debug.LogWarning("Numéro de mélodie non reconnu !");

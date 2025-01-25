@@ -100,7 +100,7 @@ namespace Models
         public IEnumerator InvincibilityFrames(float invincibilityTime)
         {
             canBeAttacked = false;
-            GetComponent<CircleCollider2D>().enabled = false;
+            GetComponent<Collider2D>().enabled = false;
 
             //A CHANGER AVEC UN VRAI TRUC
             SpriteRenderer sp = GetComponent<SpriteRenderer>();
@@ -110,7 +110,7 @@ namespace Models
             //
 
             yield return new WaitForSeconds(invincibilityTime);
-            GetComponent<CircleCollider2D>().enabled = true;
+            GetComponent<Collider2D>().enabled = true;
             canBeAttacked = true;
 
             //FIN
@@ -150,6 +150,7 @@ namespace Models
         }
 
         public IEnumerator lifeTime(GameObject obj,Attack attack) {
+            Debug.Log("feur");
                 obj.GetComponent<PolygonCollider2D>().enabled = true;
                 yield return new WaitForSeconds(attack.attackDuration);
                 obj.GetComponent<PolygonCollider2D>().enabled = false;
