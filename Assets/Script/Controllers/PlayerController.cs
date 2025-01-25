@@ -27,6 +27,8 @@ public class PlayerController : PlayerCharacter
 
     private Vector3 reference = Vector3.zero;
 
+    public Animator animator;
+
     void Start()
     {
         targetPosition = transform.position;
@@ -35,6 +37,11 @@ public class PlayerController : PlayerCharacter
 
     void Update()
     {
+
+        /*animator*/
+        animator.SetFloat("High_Down", rb.linearVelocity.y);
+        animator.SetFloat("Right_Left", rb.linearVelocity.x);
+
         HandleMovementInput();
 
         if (Input.GetKeyDown(KeyCode.Space) && !isCoroutineRunning)

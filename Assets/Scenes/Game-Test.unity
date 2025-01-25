@@ -5230,7 +5230,7 @@ MonoBehaviour:
   maxHealth: 50
   health: 50
   damage: 20
-  walkSpeed: 5
+  walkSpeed: 75
   run: 0
   knockbackTime: 0
   invincibilitySecondes: 0
@@ -5241,8 +5241,8 @@ MonoBehaviour:
   canBeAttacked: 1
   attackBall: {fileID: 0}
   isCoroutineRunning: 0
-  bulletPrefab: {fileID: 0}
-  bulletPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 5156471235371309508, guid: fb4f9f9ee6b5c424bbe047c2c135bc4f, type: 3}
+  animator: {fileID: 1987920509}
 --- !u!212 &1987920506
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5307,7 +5307,7 @@ Transform:
   m_GameObject: {fileID: 1987920502}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -441.04004, y: -204.34, z: 0}
+  m_LocalPosition: {x: -441.52, y: -204.31, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5339,7 +5339,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!95 &1987920509
 Animator:
   serializedVersion: 7
