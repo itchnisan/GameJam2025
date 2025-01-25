@@ -1,9 +1,7 @@
-using UnityEngine;
-
 public class startWithRun : MobMovement
 {
 
-    public startWithRun() : base( (mobRB , playerPosition, moveSpeed) =>
+    public startWithRun() : base((mobRB, playerPosition, moveSpeed) =>
     {
         return new AIRun(mobRB, playerPosition, moveSpeed);
     })
@@ -11,8 +9,9 @@ public class startWithRun : MobMovement
 
     }
 
-    void Start() { 
+    void Start()
+    {
         base.baseStart();
-        
+
     }
 }

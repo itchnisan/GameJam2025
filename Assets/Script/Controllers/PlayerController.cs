@@ -1,14 +1,11 @@
-using UnityEngine;
 using Models;
+using UnityEngine;
 
 public class PlayerController : PlayerCharacter
 {
-    private Vector2 targetPosition;
-
-    private Vector2 shootDirection;
     private bool isMoving = false;
 
-    private bool canShoot = true;
+    //private bool canShoot = true;
 
     [SerializeField] // Rendre visible dans l'Inspector
     public static bool hasMelody1 = false; // Utilisé pour l'inspector
@@ -26,29 +23,42 @@ public class PlayerController : PlayerCharacter
         private set => hasMelody2 = value; 
     }
     public GameObject bulletPrefab;
+    private Rigidbody2D rb;
+
+    private Vector3 reference = Vector3.zero;
 
     void Start()
     {
         targetPosition = transform.position;
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        HandleMovement();
+        HandleMovementInput();
 
-        //test degat
-        /*if (Time.time % 3 < Time.deltaTime)
-            {
-            TakeDamage(10); // Call TakeDamage every 3 seconds with a damage value of 10
-            }
-        Debug.Log("Health: " + health);*/
+        if (Input.GetKeyDown(KeyCode.Space) && !isCoroutineRunning)
+        {
+            DoAttackBall();
+
+            Debug.Log("OK");
+        }
     }
 
-    void HandleMovement()
+    private void FixedUpdate()
+    {
+        if (isMoving)
+        {
+            Move();
+        }
+    }
+
+    void HandleMovementInput()
     {
         if (stun)
         {
             isMoving = false;
+            targetPosition = transform.position;
             return;
         }
 
@@ -56,25 +66,33 @@ public class PlayerController : PlayerCharacter
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 clickPosition = new Vector2(mousePosition.x, mousePosition.y);
-
-            RaycastHit2D hit = Physics2D.Raycast(clickPosition, Vector2.zero); 
-            if (hit.collider != null) 
+            RaycastHit2D hit = Physics2D.Raycast(clickPosition, Vector2.zero);
+            if (hit.collider != null)
             {
                 targetPosition = clickPosition;
                 isMoving = true;
             }
         }
 
-        if (isMoving)
+    }
+
+    private void Move()
+    {
+        float currentSpeed = Input.GetKey(KeyCode.LeftShift) ? run : walkSpeed;
+
+        float deltaX = targetPosition.x - this.transform.position.x;
+        float deltaY = targetPosition.y - this.transform.position.y;
+
+        Vector2 movement = new Vector2(deltaX, deltaY);
+        //transform.position = Vector2.MoveTowards(transform.position, targetPosition, currentSpeed * Time.deltaTime);
+
+        MakeMove(movement, currentSpeed);
+
+        if (Vector2.Distance(transform.position, targetPosition) < 0.1f)
         {
-            float currentSpeed = Input.GetKey(KeyCode.LeftShift) ? runSpeed : walkSpeed;
-
-            transform.position = Vector2.MoveTowards(transform.position, targetPosition, currentSpeed * Time.deltaTime);
-
-            if (Vector2.Distance(transform.position, targetPosition) < 0.1f)
-            {
-                isMoving = false;
-            }
+            targetPosition = transform.position;
+            rb.linearVelocity = Vector2.zero;
+            isMoving = false;
         }
     }
 
@@ -95,6 +113,21 @@ public class PlayerController : PlayerCharacter
                 break;
         }
     }
+    void DoAttackBall()
+    {
+        attackBall.DoAttack(this, bulletPrefab);
+    }
+
+    
+
+
+    private void MakeMove(Vector2 _movement, float moveSpeed)
+    {
+        _movement.Normalize();
+        _movement = moveSpeed * Time.deltaTime * _movement;
+
+        rb.linearVelocity = Vector3.SmoothDamp(rb.linearVelocity, _movement, ref reference, 0.05f);
+    }
 
     void doAttack()
     {
@@ -111,5 +144,6 @@ public class PlayerController : PlayerCharacter
         //         shootDirection = clickPosition;
         //     }
         // }
+        }
     }
-}
+

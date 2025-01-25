@@ -4,14 +4,16 @@ public class Chest : MonoBehaviour
 {
     public GameObject itemInside; 
     public Transform spawnPoint; 
-    public int melodyNumber = 0; 
+    public int melodyNumber = 0;  
+
+    public Animator animator;
 
     private bool isPlayerNearby = false;
     private bool isOpened = false;
 
     void Update()
     {
-        
+
         if (isPlayerNearby && !isOpened && Input.GetKeyDown(KeyCode.E))
         {
             OpenChest();
@@ -21,6 +23,12 @@ public class Chest : MonoBehaviour
     private void OpenChest()
     {
         isOpened = true;
+
+
+        if (animator != null)
+        {
+            animator.SetTrigger("Open");
+        }
 
 
         if (itemInside != null && spawnPoint != null)
@@ -59,6 +67,7 @@ public class Chest : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
+
         if (other.CompareTag("Player"))
         {
             isPlayerNearby = false;

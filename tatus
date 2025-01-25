@@ -1,0 +1,79 @@
+[33mcommit e954a7646e96d646d57799d1575becc568bfdb86[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mactions-player[m[33m, [m[1;31morigin/actions-player[m[33m)[m
+Author: fortin233 <fort1.lukas@gmail.com>
+Date:   Thu Jan 23 23:52:03 2025 +0100
+
+    fix bugggggggggggggg
+
+[33mcommit 5cff2ad9e93c4e3e3b6cc8d85dd14ab357e63d51[m
+Author: fortin233 <fort1.lukas@gmail.com>
+Date:   Thu Jan 23 23:35:42 2025 +0100
+
+    fix bug
+
+[33mcommit 757a43f7d4b546ffc7e2fe5248be894b5fe5caff[m
+Merge: 1d42caf b2ba3bf
+Author: fortin233 <fort1.lukas@gmail.com>
+Date:   Thu Jan 23 23:32:22 2025 +0100
+
+    Merge branch 'el-parton' of https://github.com/itchnisan/GameJam2025 into actions-player
+
+[33mcommit b2ba3bf82c74e465f03d36405c7966f060be3055[m[33m ([m[1;31morigin/el-parton[m[33m, [m[1;32mel-parton[m[33m)[m
+Author: Leo Berranger <berrang232@unicaen.fr>
+Date:   Thu Jan 23 23:29:54 2025 +0100
+
+    je suis une salope
+
+[33mcommit 1d42cafada5517e058ab632cdd7958966bbc6c31[m
+Merge: 7c0436d f317129
+Author: fortin233 <fort1.lukas@gmail.com>
+Date:   Thu Jan 23 23:25:06 2025 +0100
+
+    Merge branch 'el-parton' of https://github.com/itchnisan/GameJam2025 into actions-player
+
+[33mcommit 7c0436d9692c7545fa74052f8b801613878cafbb[m[33m ([m[1;31morigin/movementPlayer[m[33m)[m
+Author: fortin233 <fort1.lukas@gmail.com>
+Date:   Thu Jan 23 23:19:55 2025 +0100
+
+    ajout v1 degat
+
+[33mcommit 4c25b313335cbbad7935ac4e71b1dda5ee3dc108[m
+Author: Leo Berranger <berrang232@unicaen.fr>
+Date:   Thu Jan 23 23:12:37 2025 +0100
+
+    fusion entité
+
+[33mcommit d996e309bacbd8aa9a4f50d898e2c8976180dae8[m
+Author: fortin233 <fort1.lukas@gmail.com>
+Date:   Thu Jan 23 23:05:25 2025 +0100
+
+    player Movement v1 fonctionnel
+
+[33mcommit f317129f9acbe96f85c152883d0ecbe6984ee221[m
+Author: Leo Berranger <berrang232@unicaen.fr>
+Date:   Thu Jan 23 22:54:45 2025 +0100
+
+    fix + truc plus respecteux des patrons
+
+[33mcommit 5d2a757549f9628c8288ea7b24f3aaec90357069[m
+Author: Leo Berranger <berrang232@unicaen.fr>
+Date:   Thu Jan 23 22:10:28 2025 +0100
+
+    correction je suis trop con pour rester en vie
+
+[33mcommit 1e711a4f2f6dc6bb7902fcf2fa5a90a28d5ac4a3[m
+Author: Leo Berranger <berrang232@unicaen.fr>
+Date:   Thu Jan 23 22:02:10 2025 +0100
+
+    ajout de mobAI
+
+[33mcommit 676556a6f00262888a0a156f637207bf9980bf58[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: Leo Berranger <berrang232@unicaen.fr>
+Date:   Thu Jan 23 19:36:17 2025 +0100
+
+    first commit
+
+[33mcommit 18ca919425a6931891d12c89773509ea9e76714d[m
+Author: courtoi223 <courtoi223@unicaen.fr>
+Date:   Thu Jan 23 19:09:47 2025 +0100
+
+    Start of Project
